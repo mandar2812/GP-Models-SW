@@ -1,26 +1,99 @@
-\documentclass{report}
+\documentclass{article}
 
 \usepackage{amsmath}
 \usepackage{txfonts}
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{url}
+\usepackage{natbib}
+\bibliographystyle{biblio.bst}
 
-\title{Probabilistic Forecasting of the Disturbance Storm Time Index: An Autoregressive Gaussian Process approach}
+\title{Probabilistic Forecasting of Geomagnetic Indices using Gaussian Process Models}
 
 \begin{document}
 
 
 \begin{abstract}
-We present a methodology for generating probabilistic predictions for the \emph{Disturbance Storm Time} ($Dst$) geomagnetic activity index. We focus on the \emph{One Step Ahead} (OSA) prediction task and use the OMNI hourly resolution data to build our models.
 
-Our proposed methodology is based on the technique of \emph{Gaussian Process Regression} (GPR). Within this framework we develop two models; \emph{Gaussian Process Auto-Regressive} (GP-AR) and \emph{Gaussian Process Auto-Regressive with eXogenous inputs} (GP-ARX). 
+In this chapter, we give the reader an indepth view into building of probabilistic forecasting models for geomagnetic time series using the \emph{Gaussian Process} methodology outlined in the previous chapters. 
 
-We also propose a criterion to aid model selection with respect to the order of auto-regressive inputs. Finally we test the performance of the GP-AR and GP-ARX models on a set of 63 geomagnetic storms between 1998 and 2006 and illustrate sample predictions with error bars for some of these events.
+
 
 \end{abstract}
 
 
-\section{Intro}
+\section{Geomagnetic Time Series \& Forecasting}
+
+The Earth's magnetosphere is a region around the planet where the Earth's own magnetic field dominates the magnetic field of outer space. It is a region which is impinged upon constantly by the solar wind. The ionised plasma ejected by the sun couples with the Earth's magnetic field in a complex manner leading to highly non-linear and chaotic processes which determine the state of the magnetosphere. It is quite common to reduce these complex dependencies by condensing the state of the Earth's magnetosphere into a set of geomagnetic indices.
+
+Geomagnetic indices come in various forms, they may take continuous or discrete values and may be defined with varying time resolutions. Their values are often calculated by averaging or combining a number of readings taken by instruments, usually magnetometers, around the Earth. Each geomagnetic index is a proxy for a particular kind of phenomenon. Some popular indices are the $K_p$, $Dst$ and the $AE$ index.
+
+\begin{enumerate}
+    \item $K_p$: The Kp-index is a discrete valued global geomagnetic activity index and is based on 3 hour measurements of the K-indices \citep{Bartels}. The K-index itself is a three hour long quasi-logarithmic local index of the geomagnetic activity, relative to a calm day curve for the given location.
+    
+    \item $AE$: The Auroral Electrojet Index, $AE$, is designed to provide a global, quantitative measure of auroral zone magnetic activity produced by enhanced Ionospheric currents flowing below and within the auroral oval \citep{AEIndex}. It is a continuous index which is calculated every hour.
+    
+    \item $Dst$: A continuous hourly index which gives a measure of the weakening or strengthening of the Earth's equatorial magnetic field due to the weakening or strengthening of the ring currents and the geomagnetic storms \citep{DesslerAndParker}. 
+\end{enumerate}
+
+Space weather forecasting systems usually use in-situ measurements of solar wind parameters, taken by satellites, as well as historical data of indices to produce forcasts for various geomagnetic time series. In this chapter for the purpose of exposition, we will focus on one hour ahead prediction of the $Dst$ time series. 
+
+A number of modeling techniques have been applied for the prediction of the $Dst$ index. One of the earliest forecasting techniques involves calculating the $Dst(t)$ as a solution of an \emph{Ordinary Differential Equation} (ODE) which expressed the rate of change of $Dst(t)$ as a combination of two terms: decay and injection $\frac{d Dst(t)}{dt} = Q(t) - \frac{Dst(t)}{\tau}$, where $Q(t)$ relates to the particle injection from the plasma sheet into the inner magnetosphere. This method was presented first by \citet{JGR:JGR10260} and later modified and extended in works such as \citet{Wang:Dst}, \citet{JGRA:JGRA14856}, \citet{Ballatore2014} and others.
+
+%Talk about NARMAX Dst
+
+Important empirical geomagnetic prediction models include the \emph{Nonlinear Auto-Regessive Moving Average with eXogenous inputs} (NARMAX) methodology (see \citet{doi:10.1080/00207178908559767}, \citet{GRL:GRL13494}, \citet{GRL:GRL20944}, \citet{JGRA:JGRA18657}, \citet{balikhin:narmax}, \citet{JGRA:JGRA20661}, \citet{JGRA:JGRA50192}) and \emph{Artificial Neural Networks} (ANN) based models (\citet{Lund}, \citet{JGRA:JGRA17461}, \citet{SWE:SWE286}, \citet{pallocchia:hal-00318011}) for time series prediction of $Dst$ and $Kp$ indices from interplanetary magnetic field data and solar wind parameters. 
+
+%Talk about need for probabilistic forecasts.
+Although much research has been done on prediction of the $Dst$ index, much less has been done on probabilistic forecasting of $Dst$. One such work described in \citet{McPherron:2013} involves identification of high speed solar wind streams using the WSA model, using predictions of high speed streams to construct ensembles of $Dst$ trajectories which yield the quartiles of $Dst$ time series. 
+
+Probabilistic forecasting is of particular importance in geophysics applications as the end users of forecasts often require confidence bounds on the said forecasts. It is in this context where \emph{Gaussian Processes} become especially attractive due to their inherent probabilistic formulation and tractability of analytical inference.
+
+
+\section{Gaussian Processes}
+
+\emph{Gaussian Processes} first appeared in machine learning research in \citet{Neal:1996:BLN:525544}, as the limiting case of Bayesian inference performed on neural networks with infinitely many neurons in the hidden layers. Although their inception in the machine learning community is recent, their origins can be traced back to the geo-statistics research community where they are known as \emph{Kriging} methods \citep{krige1951statistical}. In pure Mathematics, \emph{Gaussian Processes} have been studied extensively and their existence was first proven by Kolmogorov's extension theorem \citep{tao2011introduction}. The reader is referred to \citet{Rasmussen:2005:GPM:1162254} for an in depth treatment of Gaussian Processes in machine learning.
+
+Without going into too many details, we give a quick recap of the formulation and exact inference in \emph{Gaussian Process Regression} models. 
+
+\subsection{Gaussian Process Regression: Formulation}
+
+Our aim is to infer an unknown function $f(\mathbf{x})$ from its noise corrupted measurements $(\mathbf{x}_i, y_i)$ where $y_i = f(\mathbf{x}_i) + \epsilon$ and $\epsilon \sim \mathcal{N}(0, \sigma^2)$ is independent and identically distributed Gaussian noise.
+
+A \emph{Gaussian Process} model represents the finite dimensional probability distribution of $f(\mathbf{x}_i)$ by a multivariate gaussian having a particular structure for its mean and covariance as shown in \ref{eq:normal} - \ref{eq:sto}.
+
+\begin{align}
+ \mathbf{f} = & \left( \begin{array}{c} f(\mathbf{x}_1) \\ f(\mathbf{x}_2) \\ \vdots \\ f(\mathbf{x}_N) \end{array} \right) \label{eq:fvalues}\\
+ \vspace{2\baselineskip}
+ \mathbf{f} | \mathbf{x}_1, \cdots, \mathbf{x}_N \sim & \mathcal{N}\left( \mathbf{m}, \mathbf{K} \right)  \label{eq:normal}\\
+ \vspace{2\baselineskip}
+ \mathbb{P}( \mathbf{f} \ | \ \mathbf{x}_1, \cdots, \mathbf{x}_N) = & \frac{1}{(2\pi)^{n/2} det(\mathbf{K})^{1/2}} exp \left(-\frac{1}{2} (\mathbf{f} - \mathbf{m})^T \mathbf{K}^{-1} (\mathbf{f} - \mathbf{m}) \right) \label{eq:sto}
+\end{align}
+
+In order to uniquely define the distribution of $\mathbf{f}$, it is required to specify $\mathbf{m}$ and $\mathbf{K}$. For this probability density to be valid, there are further requirements imposed on $\mathbf{K}$: 
+
+\begin{enumerate}
+      \item Symmetry: $\mathbf{K}_{ij} = \mathbf{K}_{ji} \ \forall i,j \in {1, \cdots, N} $ 
+      \item Positive Semi-definiteness: $\mathbf{z}^T \mathbf{K} \mathbf{z} \geq 0 \ \forall \mathbf{z} \in \mathbb{R}^N$  
+\end{enumerate}
+
+In \emph{Gaussian Processes} the individual elements of $\mathbf{x}$ and $\mathbf{K}$ are specified in the form of functions as shown below.
+
+\begin{align}
+      \mu_i = & \mathbb{E}[f(\mathbf{x}_i)] := m(\mathbf{x}_i) \\
+      \Lambda_{ij} = & \mathbb{E}[(f(\mathbf{x}_i) - \mu_i)(f(\mathbf{x}_j) - \mu_j)] := K(\mathbf{x}_i, \mathbf{x}_j)
+\end{align}
+
+In the machine learning community, $m(.)$ and $K(.,.)$ are known as the \emph{mean function} and \emph{covariance function} or \emph{kernel function} of the process respectively. Giving the expression for $m(.)$ and $K(.,.)$ uniquely specifies a particular \emph{Gaussian Process} and so a GP model is often expressed notationally as shown below.
+
+\begin{equation}
+    f(\mathbf{x}) \sim \mathcal{GP}(m(\mathbf{x}), K(\mathbf{x}, \mathbf{x}'))
+\end{equation}
+
+\subsection{Gaussian Process Regression: Inference}
+
+
+
+\bibliography{references}
 
 \end{document}
