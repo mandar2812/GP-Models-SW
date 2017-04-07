@@ -185,11 +185,11 @@ In this text, we construct GPR models with a combination of the \emph{maximum li
 
 \subsection{Model Selection}
 
-Given a GPR model with a kernel function $K_\theta$, the problem of model selection consists of finding appropriate values for the kernel hyper-parameters $\theta = \left(\theta_1, \theta_2, \cdots, \theta_i\right)$. In order to assign a value to $\theta$, we must define an objective function which represents our confidence that the GP model built from a particular value of $\theta$ is the best performing model. Since GP models are constructed from assumptions about the conditional probability distribution of the data $\mathbb{P}(\mathbf{y}|\mathbf{X})$, it is natural to use the negative log-likelihood of the training data as a model selection criterion. 
+Given a GPR model with a kernel function $K_\theta$, the problem of model selection consists of finding appropriate values for the kernel hyper-parameters $\theta = \left(\theta_1, \theta_2, \cdots, \theta_i\right)$. In order to assign a value to $\theta$, we must define an objective function which represents our confidence that the GP model built from a particular value of $\theta$ is the best performing model. Since GP models are constructed from assumptions about the conditional probability distribution of the data $p(\mathbf{y}|\mathbf{X})$, it is natural to use the negative log-likelihood of the training data as a model selection criterion. 
 
 \begin{align*}
-  Q(\theta) & = - log(p(\mathbf{y}|\mathbf{X}, K_\theta)) \\
-            & = -\frac{1}{2} \mathbf{y}^\intercal (\mathbf{K}_\theta + \sigma^{2} \mathbf{I})^{-1} \mathbf{y} - \frac{1}{2}|\mathbf{K}_\theta + \sigma^{2} \mathbf{I}| - \frac{N}{2}log(2\pi) \\
+  Q(\theta) & = - log \ p(\mathbf{y}|\mathbf{X}, \theta) \\
+            & = \frac{1}{2} \mathbf{y}^\intercal (\mathbf{K}_\theta + \sigma^{2} \mathbf{I})^{-1} \mathbf{y} + \frac{1}{2}|\mathbf{K}_\theta + \sigma^{2} \mathbf{I}| + \frac{N}{2}log(2\pi) \\
   \mathbf{K}_\theta & = [K_{\theta}(\mathbf{x}_i, \mathbf{x}_j)]_{N \times N}
 \end{align*}
 
@@ -212,14 +212,21 @@ This is the simplest procedure that may be applied for selection of GPR models. 
 
 \subsubsection*{Coupled Simulated Annealing}
 
-Introduced in \citet{Xavier-De-Souza2010}, it follows the same procedure as \emph{grid search}, but after evaluation of the objective $Q(.)$ on the grid, each grid point is iteratively mutated in a random walk fashion. This mutation is accepted or rejected according to the new value of $Q(.)$ as well as its value on the other grid points. This procedure is iterated until some stop criterion is reached.
+Introduced in \citet{Xavier-De-Souza2010}, \emph{Coupled Simulated Annealing} (CSA) is a generalisation of \emph{Simulated Annealing} (SA). 
+
+CSA follows the same procedure as \emph{grid search}, but after evaluation of the objective $Q(.)$ on the grid, each grid point is iteratively mutated in a random walk fashion. This mutation is accepted or rejected according to the new value of $Q(.)$ as well as its value on the other grid points. This procedure is iterated until some stop criterion is reached.
 
 \subsubsection*{Maximum Likelihood} 
 
-This technique as outlined in \citet{Rasmussen:2005:GPM:1162254} is a form of \emph{gradient descent}. It involves starting with an initial guess for $\theta$ and iteratively improving it by calculating the gradient of $Q(.)$ with respect to $\theta$. Although this method seems intuitive, it introduces an extra computational cost of calculating the gradient of $Q(\theta)$ with respect to each $\theta_i$ in every iteration and applying this method can sometimes lead to overfitting of the GPR model to the training data \citep{Rasmussen:2005:GPM:1162254}.
+This technique, as described in \citet{Rasmussen:2005:GPM:1162254}, is a form of \emph{gradient descent}. It involves starting with an initial guess for $\theta$ and iteratively improving it by calculating the gradient of $Q(.)$ with respect to $\theta$. The gradient of $Q(.)$ with respect to each hyper-parameter $\theta_i$ can be calculated analytically as shown below.
+
+\begin{align*}
+\frac{\partial}{\partial \theta_i} log \ p(\mathbf{y}|\mathbf{X}, \theta) & = \frac{1}{2} \mathbf{y}^\intercal K^{-1} \frac{\partial K}{\partial \theta_i} K^{-1} \mathbf{y}  - \frac{1}{2} tr(K^{-1} \frac{\partial K}{\partial \theta_i})\\
+ & = \frac{1}{2} tr((\mathbf{\alpha}\mathbf{\alpha}^\intercal - K^{-1}) \frac{\partial K}{\partial \theta_i}) \ \ where \ \mathbf{\alpha} = K^{-1} \mathbf{y}
+\end{align*}
 
 
-
+Although gradient based \emph{Maximum Likelihood} looks very similar to the \emph{Gradient Descent} used to learn parametric regression models like \emph{Feed forward Neural Networks}, in the GPR model selection context it introduces an extra computational cost of calculating the gradient of $Q(\theta)$ with respect to each $\theta_i$ in every iteration. Applying this method can sometimes lead to overfitting of the GPR model to the training data \citep{Rasmussen:2005:GPM:1162254}.
 
 
 
