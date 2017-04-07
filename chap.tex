@@ -216,6 +216,15 @@ Introduced in \citet{Xavier-De-Souza2010}, \emph{Coupled Simulated Annealing} (C
 
 From an implementation point of view, CSA follows the same procedure as \emph{grid search}, but after evaluation of the objective $Q(.)$ on the grid, each grid point is iteratively mutated in a random walk fashion. This mutation is accepted or rejected according to the new value of $Q(.)$ as well as its value on the other grid points. This procedure is iterated until some stop criterion is reached.
 
+To illustrate how CSA updates are made and accepted consider a population or ensemble of hyper-parameter values ${x_i}$ which can be considered to be initialised in a grid based fashion. For each configuration $x_i$ a probing solution $y_i = x_i + \epsilon$ is generated where $\epsilon$ is drawn from some random variable. The acceptance probability of the solution is calculated as shown below.
+
+\begin{align*}
+\mathbb{P}(x_i \rightarrow y_i | {x_i}) & = \frac{exp(-E(y_i)/T)}{exp(-E(y_i)/T) + \gamma} \\
+\gamma & = \sum_{j}{exp \left ( \frac{-E(x_j)}{T} \right )}
+\end{align*}
+
+The quantity $\gamma$ defines the \emph{coupling} between the states ${x_i}$ of the ensemble, when the number of configurations in the emsemble $x_i$ is one this rule reduces to the classical \emph{Metropolis-Hastings} acceptance rule of the SA algorithm. Upto 4 variants of the CSA algorithm have been defined with different acceptance rules and temperature annealing schedules, the reader is advised to refer to \citet{Xavier-De-Souza2010} for an in-depth treatment of the CSA optimization class.  
+
 \subsubsection*{Maximum Likelihood} 
 
 This technique, as described in \citet{Rasmussen:2005:GPM:1162254}, is a form of \emph{gradient descent}. It involves starting with an initial guess for $\theta$ and iteratively improving it by calculating the gradient of $Q(.)$ with respect to $\theta$. The gradient of $Q(.)$ with respect to each hyper-parameter $\theta_i$ can be calculated analytically as shown below.
