@@ -212,9 +212,9 @@ This is the simplest procedure that may be applied for selection of GPR models. 
 
 \subsubsection*{Coupled Simulated Annealing}
 
-Introduced in \citet{Xavier-De-Souza2010}, \emph{Coupled Simulated Annealing} (CSA) is a generalisation of \emph{Simulated Annealing} (SA). 
+Introduced in \citet{Xavier-De-Souza2010}, \emph{Coupled Simulated Annealing} (CSA) is a family of optimization techniques which is a generalization of \emph{Simulated Annealing} (SA) \citep{Kirkpatrick671}. The CSA optimization technique can be understood as a set of parallel SA processes which are coupled by their acceptance probabilities.
 
-CSA follows the same procedure as \emph{grid search}, but after evaluation of the objective $Q(.)$ on the grid, each grid point is iteratively mutated in a random walk fashion. This mutation is accepted or rejected according to the new value of $Q(.)$ as well as its value on the other grid points. This procedure is iterated until some stop criterion is reached.
+From an implementation point of view, CSA follows the same procedure as \emph{grid search}, but after evaluation of the objective $Q(.)$ on the grid, each grid point is iteratively mutated in a random walk fashion. This mutation is accepted or rejected according to the new value of $Q(.)$ as well as its value on the other grid points. This procedure is iterated until some stop criterion is reached.
 
 \subsubsection*{Maximum Likelihood} 
 
