@@ -183,7 +183,7 @@ In this text, we construct GPR models with a combination of the \emph{maximum li
 \end{align}
 
 
-\subsection{Model Selection}
+\subsection{Model Selection: Hyper-parameters}
 
 Given a GPR model with a kernel function $K_\theta$, the problem of model selection consists of finding appropriate values for the kernel hyper-parameters $\theta = \left(\theta_1, \theta_2, \cdots, \theta_i\right)$. In order to assign a value to $\theta$, we must define an objective function which represents our confidence that the GP model built from a particular value of $\theta$ is the best performing model. Since GP models are constructed from assumptions about the conditional probability distribution of the data $p(\mathbf{y}|\mathbf{X})$, it is natural to use the negative log-likelihood of the training data as a model selection criterion. 
 
@@ -199,10 +199,11 @@ The model selection problem can now be expressed as the minimization problem sho
 \theta^* = arg\min_{\theta} \ Q(\theta)
 \end{align*}
 
+\citet{Rasmussen:2005:GPM:1162254} note that there are ready interpretations to the three terms which add up to give $Q(.)$. The first term $\frac{1}{2} \mathbf{y}^\intercal (\mathbf{K}_\theta + \sigma^{2} \mathbf{I})^{-1} \mathbf{y}$ quantifies the fit of the model with respect to the training data, the second term $\frac{1}{2}|\mathbf{K}_\theta + \sigma^{2} \mathbf{I}|$ is a complexity penalty, in non-parametric models such as \emph{Gaussian Processes} the model complexity grows with the number of training data points $N$. The third term $\frac{N}{2}log(2\pi)$ is a normalization term.
+
 The objective function $Q(\theta)$ can have multiple local minima, and evaluating the value of $Q(.)$ at any given $\theta$ requires inversion of the matrix $\mathbf{K}_\theta + \sigma^{2} \mathbf{I}$ which has a time complexity $O(N^3)$ as noted above. In the interest of saving computational cost, one cannot use exhaustive search through the domain of the hyper-parameters to inform our choice for $\theta$.
 
 The model selection problem has historically received less attention due to a combination of difficulty and numerous design decisions like choice of hyper-parameter optimization techniques, which makes model selection as much of an art as science. 
-
 Choosing a suitable heuristic or algorithm for model selection for GP models is quite often a balancing exercise between the computational limitations of the modeler and the need to explore the hyper-parameter space in a manner that yields a satisfactory predictive model. Some of the techniques used for model selection in the context of GPR include.
 
 
@@ -223,7 +224,7 @@ To illustrate how CSA updates are made and accepted consider a population or ens
 \gamma & = \sum_{j}{exp \left ( \frac{-E(x_j)}{T} \right )}
 \end{align*}
 
-The quantity $\gamma$ defines the \emph{coupling} between the states ${x_i}$ of the ensemble, when the number of configurations in the emsemble $x_i$ is one this rule reduces to the classical \emph{Metropolis-Hastings} acceptance rule of the SA algorithm. Upto 4 variants of the CSA algorithm have been defined with different acceptance rules and temperature annealing schedules, the reader is advised to refer to \citet{Xavier-De-Souza2010} for an in-depth treatment of the CSA optimization class.  
+The quantity $\gamma$ defines the \emph{coupling} between the states ${x_i}$ of the ensemble, when the number of configurations in the ensemble $x_i$ is one this rule reduces to the classical \emph{Metropolis-Hastings} acceptance rule of the SA algorithm. Up to 4 variants of the CSA algorithm have been defined with different acceptance rules and temperature annealing schedules, the reader is advised to refer to \citet{Xavier-De-Souza2010} for an in-depth treatment of the CSA optimization class.  
 
 \subsubsection*{Maximum Likelihood} 
 
@@ -237,8 +238,15 @@ This technique, as described in \citet{Rasmussen:2005:GPM:1162254}, is a form of
 
 Although gradient based \emph{Maximum Likelihood} looks very similar to the \emph{Gradient Descent} used to learn parametric regression models like \emph{Feed forward Neural Networks}, in the GPR model selection context it introduces an extra computational cost of calculating the gradient of $Q(\theta)$ with respect to each $\theta_i$ in every iteration. Applying this method can sometimes lead to overfitting of the GPR model to the training data \citep{Rasmussen:2005:GPM:1162254}.
 
+\subsection{Model Selection: Auto-regressive Order}
 
+Apart from having a practical method for choosing values of kernel hyper-parameters, we must also address the issue of choosing the time delays $p$ and $p_v, p_b$ for the GP-AR and GP-ARX models. One might argue that we group these quantities with the kernel hyper-parameters in the model selection procedure, in the context of the GP-AR and GP-ARX models there is one reason why this might not be beneficial. 
 
+The value of kernel hyper-parameters $\theta^*$ which maximise the marginal likelihood $Q(.)$ are conditional on the chosen model orders $p$ and $p, p_v, p_b$ for GP-AR and GP-ARX respectively. Since the model orders determine the size of the input space of the predictive models, they influence the values of characteristic length scales and other kernel hyper-parameters which yield a good fit.
+
+Not only do the model orders influence the value of kernel hyper-parameters $\theta^*$ which maximise model fit, but increasing values of $p, p_v, p_b$ also make it more difficult for the model selection algorithms to search the hyper-parameter space, due to the curse of dimensionality.
+
+An empirical way to choose the values of $p, p_v, p_b$ for the GP-AR and GP-ARX models is by choosing an independent validation data set which is used to evaluate the GP models obtained from the model selection procedures of the previous section. It is then possible for the modeler to choose these model orders in way to balance performance and dimensionality of input features.
 
 \bibliography{references}
 
