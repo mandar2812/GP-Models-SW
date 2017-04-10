@@ -30,7 +30,7 @@ Geomagnetic indices come in various forms, they may take continuous or discrete 
     
     \item $AE$: The Auroral Electrojet Index, $AE$, is designed to provide a global, quantitative measure of auroral zone magnetic activity produced by enhanced Ionospheric currents flowing below and within the auroral oval \citep{AEIndex}. It is a continuous index which is calculated every hour.
     
-    \item $Dst$: A continuous hourly index which gives a measure of the weakening or strengthening of the Earth's equatorial magnetic field due to the weakening or strengthening of the ring currents and the geomagnetic storms \citep{DesslerAndParker}. 
+    \item $Dst$: A continuous hourly index which gives a measure of the weakening or strengthening of the Earth's equatorial magnetic field due to the weakening or strengthening of the ring currents and the geomagnetic storms \citep{DesslerAndParker}. A large negative value of $Dst$ ($ \leq -150 \ nT$) indicates occurence of geomagnetic storm events which are of particular importance in space weather prediction due to their effects on telecommunications infrastructure. 
 \end{enumerate}
 
 Space weather forecasting systems usually use in-situ measurements of solar wind parameters, taken by satellites, as well as historical data of indices to produce forcasts for various geomagnetic time series. The principal data source for forecasting of geomagnetic indices is the \emph{OMNI} data set hosted by NASA on the \emph{Space Physics Data Facility} (SPDF).
@@ -160,7 +160,7 @@ In this model we choose distinct time lags $p$, $p_{v}$ and $p_{b}$ for $Dst$, $
         & \ \ \ \ \  B_{z}(t-1), \cdots, B_{z}(t-p_{b}+1))
 \end{align*}
 
-\section{One Hour Ahead $Dst$: Model Design}
+\section{One Hour Ahead $Dst$: Model Design}\label{sec:modeldesign}
 
 \subsection{Choice of Mean Function}
 
@@ -266,6 +266,21 @@ The value of kernel hyper-parameters $\theta^*$ which maximise the marginal like
 Not only do the model orders influence the value of kernel hyper-parameters $\theta^*$ which maximise model fit, but increasing values of $p, p_v, p_b$ also make it more difficult for the model selection algorithms to search the hyper-parameter space, due to the curse of dimensionality.
 
 An empirical way to choose the values of $p, p_v, p_b$ for the GP-AR and GP-ARX models is by choosing an independent validation data set which is used to evaluate the GP models obtained from the model selection procedures of the previous section. It is then possible for the modeler to choose these model orders in way to balance performance and dimensionality of input features.
+
+\section{GP-AR and GP-ARX: Workflow Summary}
+
+Section \ref{sec:modeldesign} brings together all the practical issues with respect to building of GP-AR and GP-ARX models for predicting $Dst$, they can be condensed to form the following steps.
+
+\begin{enumerate}
+
+\item \textbf{Data Preprocessing}: Three seperate data sets for model training and hyper-parameter selection, model order selection and model evaluation must be created. Care must be taken that the size of the training sets does not delay the processes of kernel hyper-parameter selection. The training, validation and test data sets created from this procedure must all contain non-overlapping geomagnetic storm events.
+
+\item \textbf{Choice of model components}:  Kernel, mean function, model selection procedure.
+
+\item \textbf{Model Order Selection}: In order to find appropriate values for the auto-regressive time lags $p, p_v, p_b$ for $Dst$, solar wind speed and IMF $B_z$ respectively, create models upto a certain maximum time lag i.e. $3 \leq p \leq 8$ for GP-AR and $3 \leq p + p_v + p_b \leq 8$ for GP-ARX. For each such model perform the model selection routine to select values of the kernel hyper-parameters and evaluate the resultant model on the validation set. Choose the value of $p, p_v, p_b$ which maximises predictive performance on the validation set.
+
+\end{enumerate}
+
 
 \bibliography{references}
 
