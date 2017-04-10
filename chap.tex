@@ -15,7 +15,7 @@
 
 \begin{abstract}
 
-In this chapter, we give the reader an indepth view into building of probabilistic forecasting models for geomagnetic time series using the \emph{Gaussian Process} methodology outlined in the previous chapters. 
+In this chapter, we give the reader an indepth view into building of probabilistic forecasting models for geomagnetic time series using the \emph{Gaussian Process} methodology outlined in the previous chapters. We highlight design decisions and practical issues must be addressed in order to build \emph{Gaussian Process} models for probabilistic prediction of a quantity of interest. As a case study, we formulate predictive models for one hour ahead prediction of the $Dst$ geomagnetic index.  
 
 \end{abstract}
 
@@ -209,7 +209,7 @@ Choosing a suitable heuristic or algorithm for model selection for GP models is 
 
 \subsubsection*{Grid Search}
 
-This is the simplest procedure that may be applied for selection of GPR models. This routine constructs a grid of values for $\theta$ as the cartesian product of one dimensional grids for each $\theta_i$, evaluate $Q(.)$ at each such grid point and choose the configuration which yields minimum value of $Q(.)$. The advantage of this technique is its simplicity and control over the computational cost of training GP models for practical problems. The computational cost of this procedure scales with the total number of points on the grid, this is controlled by the scales and number of grid points for each hyper-parameter $\theta_i$.
+This is the simplest procedure that may be applied for performing model selection in GPR models. This routine constructs a grid of values for $\theta$ as the cartesian product of one dimensional grids for each $\theta_i$, evaluate $Q(.)$ at each such grid point and choose the configuration which yields minimum value of $Q(.)$. The advantage of this technique is its simplicity and control over the computational cost of training GP models for practical problems. The computational cost of this procedure scales with the total number of points on the grid, this is controlled by the scales and number of grid points for each hyper-parameter $\theta_i$.
 
 \subsubsection*{Coupled Simulated Annealing}
 
