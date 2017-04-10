@@ -33,14 +33,33 @@ Geomagnetic indices come in various forms, they may take continuous or discrete 
     \item $Dst$: A continuous hourly index which gives a measure of the weakening or strengthening of the Earth's equatorial magnetic field due to the weakening or strengthening of the ring currents and the geomagnetic storms \citep{DesslerAndParker}. 
 \end{enumerate}
 
-Space weather forecasting systems usually use in-situ measurements of solar wind parameters, taken by satellites, as well as historical data of indices to produce forcasts for various geomagnetic time series. In this chapter for the purpose of exposition, we will focus on one hour ahead prediction of the $Dst$ time series. 
+Space weather forecasting systems usually use in-situ measurements of solar wind parameters, taken by satellites, as well as historical data of indices to produce forcasts for various geomagnetic time series. The principal data source for forecasting of geomagnetic indices is the \emph{OMNI} data set hosted by NASA on the \emph{Space Physics Data Facility} (SPDF).
+
+\section{Data Source: OMNI}
+The \emph{OMNI} data set is a collation of in-situ measurements taken by orbiting satellites and ground based measurements of geomagnetic indices. The data itself is represented as time averaged versions of the various quantities and is available at two frequencies, by hour and by minute. The quantities recorded can be broadly classified into two groups.
+
+\begin{enumerate}
+
+  \item Plasma Parameters and Magnetic fields: Measurements of the solar wind particularly the solar wind speed, flow angles, pressure, proton temperature, proton density and field measurements such as strength of electric and magnetic fields as well as their components in various geomagnetic coordinate systems.
+  
+  \item Indices: $Kp$, $Ae$, $Ap$, $Dst$, sunspot number.
+  
+\end{enumerate}
+
+To get a more indepth understanding about the \emph{OMNI} data, interested readers are encouraged to visit the NASA omni web service (\url{https://omniweb.gsfc.nasa.gov}).
+
+In this chapter for the purpose of exposition, we will focus on one hour ahead prediction of the $Dst$ time series. From the data we will use time histories of $Dst$, solar wind speed $V$ and the $z$-component of the interplanetary magnetic field $B_z$. Our choice is motivated by both physical and practical considerations: solar wind speed and interplanetary magnetic field are important external drivers for particle injection into the magnetosphere and they have large coverage in the \emph{OMNI} data with relatively lesser number of missing records.
+
+\section{$Dst$ Forecasting}
+
+\subsection{State of the art}
 
 A number of modeling techniques have been applied for the prediction of the $Dst$ index. One of the earliest forecasting techniques involves calculating the $Dst(t)$ as a solution of an \emph{Ordinary Differential Equation} (ODE) which expressed the rate of change of $Dst(t)$ as a combination of two terms: decay and injection $\frac{d Dst(t)}{dt} = Q(t) - \frac{Dst(t)}{\tau}$, where $Q(t)$ relates to the particle injection from the plasma sheet into the inner magnetosphere. This method was presented first by \citet{JGR:JGR10260} and later modified and extended in works such as \citet{Wang:Dst}, \citet{JGRA:JGRA14856}, \citet{Ballatore2014} and others.
 
 %Talk about NARMAX Dst
-
 Important empirical geomagnetic prediction models include the \emph{Nonlinear Auto-Regessive Moving Average with eXogenous inputs} (NARMAX) methodology (see \citet{doi:10.1080/00207178908559767}, \citet{GRL:GRL13494}, \citet{GRL:GRL20944}, \citet{JGRA:JGRA18657}, \citet{balikhin:narmax}, \citet{JGRA:JGRA20661}, \citet{JGRA:JGRA50192}) and \emph{Artificial Neural Networks} (ANN) based models (\citet{Lund}, \citet{JGRA:JGRA17461}, \citet{SWE:SWE286}, \citet{pallocchia:hal-00318011}) for time series prediction of $Dst$ and $Kp$ indices from interplanetary magnetic field data and solar wind parameters. 
 
+\subsection{Probabilistic Forecasting}
 %Talk about need for probabilistic forecasts.
 Although much research has been done on prediction of the $Dst$ index, much less has been done on probabilistic forecasting of $Dst$. One such work described in \citet{McPherron:2013} involves identification of high speed solar wind streams using the WSA model, using predictions of high speed streams to construct ensembles of $Dst$ trajectories which yield the quartiles of $Dst$ time series. 
 
