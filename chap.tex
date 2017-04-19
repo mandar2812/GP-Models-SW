@@ -18,7 +18,7 @@
 
 \begin{abstract}
 
-In this chapter, we give the reader an indepth view into building of probabilistic forecasting models for geomagnetic time series using the \emph{Gaussian Process} methodology outlined in the previous chapters. We highlight design decisions and practical issues must be addressed in order to build \emph{Gaussian Process} models for probabilistic prediction of a quantity of interest. As a case study, we formulate predictive models for one hour ahead prediction of the $Dst$ geomagnetic index.  
+In this chapter, we give the reader an indepth view into building of probabilistic forecasting models for geomagnetic time series using the \emph{Gaussian Process} methodology outlined in the previous chapters. We highlight design decisions and practical issues must be addressed in order to build \emph{Gaussian Process} models for probabilistic prediction of a quantity of interest. As a paedadogical example, we formulate, train and test a family of \emph{Gaussian Process} Auto-Regressive models for one hour ahead prediction of the $Dst$ geomagnetic index.  
 
 \end{abstract}
 
@@ -311,6 +311,62 @@ We choose a kernel $K_{osa}$ of the form given in equation \ref{eq:usedKernel}. 
 
 \section{Experiments \& Results}
 
+Figures \ref{fig:CompareMae} and \ref{fig:CompareCC} show how the mean absolute error and coefficient of correlation as calculated on the validation set storm events of Table \ref{table:validationstorms}, vary with increasing model order for GP-AR and GP-ARX. The results are represented as box and whisker plots, in which a rectangle is drawn to represent the first and third quartiles, with a horizontal line inside to indicate the median value, outlying points are shown as dots while the whiskers indicate the smallest and largest non-outliers. In both cases, the predictive performance first improves and then stagnates or worsens with increasing model order. 
+
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{Compare-mae.png}
+\caption{Mean Absolute Error on validation set storms vs model order for GP-AR and GP-ARX. \textbf{Key}: Rectangle borders represent the first and third quartiles, with a horizontal line inside to indicate the median value, outlying points are shown as dots and whiskers indicate the smallest and largest non-outliers}
+\label{fig:CompareMae}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{Compare-cc.png}
+\caption{Coefficient of Correlation on validation set storms vs model order for GP-AR and GP-ARX. \textbf{Key}: Rectangle borders represent the first and third quartiles, with a horizontal line inside to indicate the median value, outlying points are shown as dots and whiskers indicate the smallest and largest non-outliers}
+\label{fig:CompareCC}
+\end{figure}
+
+
+Figures \ref{fig:CompareMaeARX} and \ref{fig:CompareCCARX} break down the results for GP-ARX by the model selection routine used. Apart from the general trend observed in \ref{fig:CompareMae} and \ref{fig:CompareCC}, we also observe that \emph{grid search} and \emph{coupled simulated annealing} give superior performance as compared to gradient based \emph{maximum likelihood}.
+
+From the validation results, we can chose the model order which yields the best performance, for GP-AR it is $p_t = 6$ while for GP-ARX it is $p_t = 11$. Further examination of the validation results shows that in the scheme $p_t = 11$ choosing $p = 7, p_v = 1, p_b = 3$ gives superior results.
+
+
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{Compare-mae-arx.png}
+\caption{Mean Absolute Error on validation set storms vs model order for GP-AR and GP-ARX for \emph{CSA}, \emph{GS} and \emph{ML} model selection routines. \textbf{Key}: Rectangle borders represent the first and third quartiles, with a horizontal line inside to indicate the median value, outlying points are shown as dots and whiskers indicate the smallest and largest non-outliers}
+\label{fig:CompareMaeARX}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{Compare-cc-arx.png}
+\caption{Coefficient of Correlation on validation set storms vs model order for GP-AR and GP-ARX for \emph{CSA}, \emph{GS} and \emph{ML} model selection routines. \textbf{Key}: Rectangle borders represent the first and third quartiles, with a horizontal line inside to indicate the median value, outlying points are shown as dots and whiskers indicate the smallest and largest non-outliers}
+\label{fig:CompareCCARX}
+\end{figure}
+
+After choosing the best performing GP-AR and GP-ARX models, we calculate their performance on the test set of Table \ref{table:teststorms}. The results of these model evaluations are summarized in Table \ref{table:results}, the GP-AR and GP-ARX models improve upon the performance of the \emph{persistence model}.
+
+Figures \ref{fig:ComparePred1}, \ref{fig:ComparePred2} and \ref{fig:ComparePred3} show OSA predictions of the GP-ARX model with $\pm \sigma$ error bars for three storm events in the time period between 1998 and 2003. The GP-ARX model gives accurate predictions along with plausible error bars around its mean predictions.
+
+
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{PredictionsModel1/PredErrBars_Storm43.png}
+\caption{OSA Predictions with $\pm \sigma$ error bars for event: 2003/06/17 19:00 to 2003/06/19 03:00}
+\label{fig:ComparePred1}
+\end{figure}
+
+
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{PredictionsModel1/PredErrBars_Storm8.png}
+\caption{OSA Predictions with $\pm \sigma$ error bars for event: 1998/11/13 00:00 to 1998/11/15 04:00}
+\label{fig:ComparePred2}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{PredictionsModel1/PredErrBars_Storm9.png}
+\caption{OSA Predictions with $\pm \sigma$ error bars for event: 1999/01/13 16:00 to 1999/01/14 20:00}
+\label{fig:ComparePred3}
+\end{figure}
+
 
 
 
@@ -455,6 +511,7 @@ Persistence & 9.182 & 14.94 & 0.957\\
 \end{table}
 
 
+\clearpage 
 
 \bibliography{references}
 
