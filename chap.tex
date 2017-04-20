@@ -18,7 +18,7 @@
 
 \begin{abstract}
 
-In this chapter, we give the reader an indepth view into building of probabilistic forecasting models for geomagnetic time series using the \emph{Gaussian Process} methodology outlined in the previous chapters. We highlight design decisions and practical issues must be addressed in order to build \emph{Gaussian Process} models for probabilistic prediction of a quantity of interest. As a paedadogical example, we formulate, train and test a family of \emph{Gaussian Process} Auto-Regressive models for one hour ahead prediction of the $Dst$ geomagnetic index.  
+In this chapter, we give the reader an indepth view into building of probabilistic forecasting models for geomagnetic time series using the \emph{Gaussian Process} methodology outlined in the previous chapters. We highlight design decisions and practical issues must be addressed in order to use \emph{Gaussian Process} models for probabilistic prediction of a quantity of interest. As a paedadogical example, we formulate, train and test a family of \emph{Gaussian Process} Auto-Regressive models for one hour ahead prediction of the $Dst$ geomagnetic index.  
 
 \end{abstract}
 
@@ -309,9 +309,20 @@ We choose a kernel $K_{osa}$ of the form given in equation \ref{eq:usedKernel}. 
 
 \end{enumerate}
 
-\section{Experiments \& Results}
+\section{Practical Issues: Software}
+ 
+Scientific computing, whether it be in the form of simulation, data analysis or modeling is brought to fruition through well thought choices and usage of software packages. \emph{Gaussian Processes} have been implemented in a number software distributions, we discuss two of them here.
 
-After running the workflow steps as outlined in section \ref{sec:workflow} above, we can understand the performance of the GP-AR and GP-ARX family of models on task of $Dst$ prediction in the following charts.
+\begin{enumerate}
+
+\item \textbf{PlasmaML}: An open source project \url{https://gitlab.com/MD-CWI-NL/PlasmaML} maintained at the CWI Amsterdam, it is a software toolbox for Machine Learning applications in Space \& Plasma Physics. It is comprised of a number of modules, we use codes from the \textit{omni} module for the experiments and results shown in section \ref{sec:results}. It leverages the DynaML machine learning toolkit \url{https://github.com/transcendent-ai-labs/DynaML} which has a well developed library for building GP and Kernel based models and also includes in built support for a number of kernel functions as well as the \emph{Grid Search}, \emph{Maximum Likelihood} and \emph{Coupled Simulated Annealing} model selection routines applied in this chapter. \textit{PlasmaML} is written in the \textit{Scala} programming language making it distributable as a \emph{Java Runtime Environment} \textit{jar} file.
+
+\item \textbf{GPML} \citep{GPML}: A \emph{MATLAB} based toolbox for building GP models which has support for a variety of features. The software includes a number of kernel functions supported off the shelf, approximate as well as exact inference techniques and support for non-Gaussian likelihood functions. 
+\end{enumerate}
+
+\section{Experiments \& Results}\label{sec:results}
+
+After running the workflow steps as outlined in section \ref{sec:workflow} above, we can analyse the performance of the GP-AR and GP-ARX family of models on task of OSA $Dst$ prediction in the following series of charts.
 
 \subsection*{Model Selection \& Validation Performance}
 
