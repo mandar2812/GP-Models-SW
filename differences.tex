@@ -1,4 +1,7 @@
 \documentclass{article}
+%DIF LATEXDIFF DIFFERENCE FILE
+%DIF DEL chap.tex              Tue Apr 25 12:57:20 2017
+%DIF ADD revised-chapter.tex   Fri Aug  4 15:18:09 2017
 
 \usepackage{amsmath}
 \usepackage{txfonts}
@@ -12,51 +15,114 @@
 \bibliographystyle{biblio.bst}
 
 \title{Probabilistic Forecasting of Geomagnetic Indices using Gaussian Process Models}
+%DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
+%DIF UNDERLINE PREAMBLE %DIF PREAMBLE
+\RequirePackage[normalem]{ulem} %DIF PREAMBLE
+\RequirePackage{color}\definecolor{RED}{rgb}{1,0,0}\definecolor{BLUE}{rgb}{0,0,1} %DIF PREAMBLE
+\providecommand{\DIFadd}[1]{{\protect\color{blue}\uwave{#1}}} %DIF PREAMBLE
+\providecommand{\DIFdel}[1]{{\protect\color{red}\sout{#1}}}                      %DIF PREAMBLE
+%DIF SAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddbegin}{} %DIF PREAMBLE
+\providecommand{\DIFaddend}{} %DIF PREAMBLE
+\providecommand{\DIFdelbegin}{} %DIF PREAMBLE
+\providecommand{\DIFdelend}{} %DIF PREAMBLE
+%DIF FLOATSAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddFL}[1]{\DIFadd{#1}} %DIF PREAMBLE
+\providecommand{\DIFdelFL}[1]{\DIFdel{#1}} %DIF PREAMBLE
+\providecommand{\DIFaddbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFaddendFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelendFL}{} %DIF PREAMBLE
+\newcommand{\DIFscaledelfig}{0.5}
+%DIF HIGHLIGHTGRAPHICS PREAMBLE %DIF PREAMBLE
+\RequirePackage{settobox} %DIF PREAMBLE
+\RequirePackage{letltxmacro} %DIF PREAMBLE
+\newsavebox{\DIFdelgraphicsbox} %DIF PREAMBLE
+\newlength{\DIFdelgraphicswidth} %DIF PREAMBLE
+\newlength{\DIFdelgraphicsheight} %DIF PREAMBLE
+% store original definition of \includegraphics %DIF PREAMBLE
+\LetLtxMacro{\DIFOincludegraphics}{\includegraphics} %DIF PREAMBLE
+\newcommand{\DIFaddincludegraphics}[2][]{{\color{blue}\fbox{\DIFOincludegraphics[#1]{#2}}}} %DIF PREAMBLE
+\newcommand{\DIFdelincludegraphics}[2][]{% %DIF PREAMBLE
+\sbox{\DIFdelgraphicsbox}{\DIFOincludegraphics[#1]{#2}}% %DIF PREAMBLE
+\settoboxwidth{\DIFdelgraphicswidth}{\DIFdelgraphicsbox} %DIF PREAMBLE
+\settoboxtotalheight{\DIFdelgraphicsheight}{\DIFdelgraphicsbox} %DIF PREAMBLE
+\scalebox{\DIFscaledelfig}{% %DIF PREAMBLE
+\parbox[b]{\DIFdelgraphicswidth}{\usebox{\DIFdelgraphicsbox}\\[-\baselineskip] \rule{\DIFdelgraphicswidth}{0em}}\llap{\resizebox{\DIFdelgraphicswidth}{\DIFdelgraphicsheight}{% %DIF PREAMBLE
+\setlength{\unitlength}{\DIFdelgraphicswidth}% %DIF PREAMBLE
+\begin{picture}(1,1)% %DIF PREAMBLE
+\thicklines\linethickness{2pt} %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,0){\framebox(1,1){}}}% %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,0){\line( 1,1){1}}}% %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,1){\line(1,-1){1}}}% %DIF PREAMBLE
+\end{picture}% %DIF PREAMBLE
+}\hspace*{3pt}}} %DIF PREAMBLE
+} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddbegin}{\DIFaddbegin} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddend}{\DIFaddend} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelbegin}{\DIFdelbegin} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelend}{\DIFdelend} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddbegin}{\DIFOaddbegin \let\includegraphics\DIFaddincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddend}{\DIFOaddend \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelbegin}{\DIFOdelbegin \let\includegraphics\DIFdelincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelend}{\DIFOaddend \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddbeginFL}{\DIFaddbeginFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddendFL}{\DIFaddendFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelbeginFL}{\DIFdelbeginFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelendFL}{\DIFdelendFL} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddbeginFL}{\DIFOaddbeginFL \let\includegraphics\DIFaddincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddendFL}{\DIFOaddendFL \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelbeginFL}{\DIFOdelbeginFL \let\includegraphics\DIFdelincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelendFL}{\DIFOaddendFL \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+%DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
 
 \begin{document}
 
 
 \begin{abstract}
 
-In this chapter, we give the reader an in depth view into building of probabilistic forecasting models for geomagnetic time series using the \emph{Gaussian Process} methodology outlined in the previous chapters. We highlight design decisions and practical issues that must be addressed in order to use \emph{Gaussian Process} models for probabilistic prediction of a quantity of interest. As a pedagogical example, we formulate, train and test a family of \emph{Gaussian Process} Auto-Regressive models for one hour ahead prediction of the $Dst$ geomagnetic index.  
+In this chapter, we give the reader an \DIFdelbegin \DIFdel{indepth }\DIFdelend \DIFaddbegin \DIFadd{in depth }\DIFaddend view into building of probabilistic forecasting models for geomagnetic time series using the \emph{Gaussian Process} methodology outlined in the previous chapters. We highlight design decisions and practical issues \DIFaddbegin \DIFadd{that }\DIFaddend must be addressed in order to use \emph{Gaussian Process} models for probabilistic prediction of a quantity of interest. As a \DIFdelbegin \DIFdel{paedadogical }\DIFdelend \DIFaddbegin \DIFadd{pedagogical }\DIFaddend example, we formulate, train and test a family of \emph{Gaussian Process} Auto-Regressive models for one hour ahead prediction of the $Dst$ geomagnetic index.  
 
 \end{abstract}
 
 \section{Geomagnetic Time Series \& Forecasting}
 
-The Earth's magnetosphere is the region above the ionosphere that is defined by the extent of the Earth's magnetic field in space. It extends several tens of thousands of kilometers into space, a region which is impinged upon constantly by the solar wind. Ionized plasma ejected by the sun couples with the Earth's magnetic field in a complex manner leading to highly non-linear and chaotic processes which determine the state of the magnetosphere. It is quite common to reduce these complex dependencies by condensing the state of the Earth's magnetosphere into a set of geomagnetic indices.
+The Earth's magnetosphere is \DIFdelbegin \DIFdel{a region around the planet where the }\DIFdelend \DIFaddbegin \DIFadd{the region above the ionosphere that is defined by the extent of the }\DIFaddend Earth's \DIFdelbegin \DIFdel{own magnetic field dominates the magnetic field of outer }\DIFdelend \DIFaddbegin \DIFadd{magnetic field in }\DIFaddend space. It \DIFdelbegin \DIFdel{is }\DIFdelend \DIFaddbegin \DIFadd{extends several tens of thousands of kilometers into space, }\DIFaddend a region which is impinged upon constantly by the solar wind. \DIFdelbegin \DIFdel{The ionised }\DIFdelend \DIFaddbegin \DIFadd{Ionized }\DIFaddend plasma ejected by the sun couples with the Earth's magnetic field in a complex manner leading to highly non-linear and chaotic processes which determine the state of the magnetosphere. It is quite common to reduce these complex dependencies by condensing the state of the Earth's magnetosphere into a set of geomagnetic indices.
 
-Geomagnetic indices come in various forms, they may take continuous or discrete values and may be defined with varying time resolutions. Their values are often calculated by averaging or combining a number of readings taken by instruments, usually magnetometers, around the Earth. Each geomagnetic index is a proxy for a particular kind of phenomenon. Some common indices are the $Kp$, $Dst$ and the $AE$ index.
+Geomagnetic indices come in various forms, they may take continuous or discrete values and may be defined with varying time resolutions. Their values are often calculated by averaging or combining a number of readings taken by instruments, usually magnetometers, around the Earth. Each geomagnetic index is a proxy for a particular kind of phenomenon. Some \DIFdelbegin \DIFdel{popular }\DIFdelend \DIFaddbegin \DIFadd{common }\DIFaddend indices are the \DIFdelbegin \DIFdel{$K_p$}\DIFdelend \DIFaddbegin \DIFadd{$Kp$}\DIFaddend , $Dst$ and the $AE$ index.
 
 \begin{enumerate}
-    \item $Kp$: The Kp-index is a discrete valued global geomagnetic
+    \item \DIFdelbegin \DIFdel{$K_p$}\DIFdelend \DIFaddbegin \DIFadd{$Kp$}\DIFaddend : The Kp-index is a discrete valued global geomagnetic
       activity index and is based on 3 hour measurements of the
       K-indices \citep{Bartels}. The K-index itself is a three hour
       long quasi-logarithmic local index of the geomagnetic activity,
-      relative to a quiet day curve for the given location.
-    
+      relative to a \DIFdelbegin \DIFdel{calm }\DIFdelend \DIFaddbegin \DIFadd{quiet }\DIFaddend day curve for the given location.
+
     \item $AE$: The Auroral Electrojet Index, $AE$, is designed to
       provide a global, quantitative measure of auroral zone magnetic
-      activity produced by enhanced ionospheric currents flowing below
+      activity produced by enhanced \DIFdelbegin \DIFdel{Ionospheric }\DIFdelend \DIFaddbegin \DIFadd{ionospheric }\DIFaddend currents flowing below
       and within the auroral oval \citep{AEIndex}. It is a continuous index which is calculated every hour.
-    
-    \item $Dst$: A continuous hourly index which measures the
+
+    \item $Dst$: A continuous hourly index which \DIFdelbegin \DIFdel{gives a measure of the
+      weakening or strengthening of the Earth's equatorial magnetic field due to the weakening or strengthening of the ring
+      currents and the geomagnetic storms }\DIFdelend \DIFaddbegin \DIFadd{measures the
       magnitude of the magnetic field induced by near equatorial ring
-      currents \citep{DesslerAndParker}. A large negative value of
-      $Dst$ ($ \leq -100 \ nT$) indicates occurrence of geomagnetic
+      currents }\DIFaddend \citep{DesslerAndParker}. A large negative value of
+      $Dst$ (\DIFdelbegin \DIFdel{$ \leq -150 \ nT$) indicates occurence }\DIFdelend \DIFaddbegin \DIFadd{$ \leq -100 \ nT$) indicates occurrence }\DIFaddend of geomagnetic
       storm events which are of particular importance in space weather
-      prediction due to their adverse effects on telecommunications
-      infrastructure, navigation systems, power grids, satellites etc. 
+      prediction due to their \DIFaddbegin \DIFadd{adverse }\DIFaddend effects on telecommunications
+      infrastructure\DIFaddbegin \DIFadd{, navigation systems, power grids, satellites etc}\DIFaddend . 
 \end{enumerate}
 
 Space weather forecasting systems usually use in-situ measurements of
 solar wind parameters, taken by satellites, as well as historical data
-of indices to produce forecasts for various geomagnetic time
-series. Real time data of solar wind parameters are recorded by the \emph{ACE}
-and \emph{DISCOVR} missions. Geomagnetic indices are often recorded in
-ground based measurements. The the \emph{Space Physics Data Facility}
-(SPDF) hosted by NASA is a gateway for accessing data from a variety
-of sources, including those mentioned above.
+of indices to produce \DIFdelbegin \DIFdel{forcasts }\DIFdelend \DIFaddbegin \DIFadd{forecasts }\DIFaddend for various geomagnetic time
+series. \DIFdelbegin \DIFdel{The principal data source for forecasting of geomagnetic indices is the }\emph{\DIFdel{OMNI}} %DIFAUXCMD
+\DIFdel{data set hosted by NASA on the }\DIFdelend \DIFaddbegin \DIFadd{Real time data of solar wind parameters are recorded by the }\emph{\DIFadd{ACE}}
+\DIFadd{and }\emph{\DIFadd{DISCOVR}} \DIFadd{missions. Geomagnetic indices are often recorded in
+ground based measurements. The the }\DIFaddend \emph{Space Physics Data Facility}
+(SPDF) \DIFaddbegin \DIFadd{hosted by NASA is a gateway for accessing data from a variety
+of sources, including those mentioned above}\DIFaddend .
 
 \section{Data Source: OMNI}
 The \emph{OMNI} data set is a collation of in-situ measurements taken by orbiting satellites and ground based measurements of geomagnetic indices. The data itself is represented as time averaged versions of the various quantities and is available at two frequencies, by hour and by minute. The quantities recorded can be broadly classified into two groups.
@@ -64,9 +130,9 @@ The \emph{OMNI} data set is a collation of in-situ measurements taken by orbitin
 \begin{enumerate}
 
   \item Plasma Parameters and Magnetic fields: Measurements of the solar wind particularly the solar wind speed, flow angles, pressure, proton temperature, proton density and field measurements such as strength of electric and magnetic fields as well as their components in various geomagnetic coordinate systems.
-  
+
   \item Indices: $Kp$, $Ae$, $Ap$, $Dst$, sunspot number.
-  
+
 \end{enumerate}
 
 To get a more indepth understanding about the \emph{OMNI} data, interested readers are encouraged to visit the NASA omni web service (\url{https://omniweb.gsfc.nasa.gov}).
@@ -83,10 +149,11 @@ A number of modeling techniques have been applied for the prediction of the $Dst
 Important empirical geomagnetic prediction models include the \emph{Nonlinear Auto-Regessive Moving Average with eXogenous inputs} (NARMAX) methodology (see \citet{doi:10.1080/00207178908559767}, \citet{GRL:GRL13494}, \citet{GRL:GRL20944}, \citet{JGRA:JGRA18657}, \citet{balikhin:narmax}, \citet{JGRA:JGRA20661}, \citet{JGRA:JGRA50192}) and \emph{Artificial Neural Networks} (ANN) based models (\citet{Lund}, \citet{JGRA:JGRA17461}, \citet{SWE:SWE286}, \citet{pallocchia:hal-00318011}) for time series prediction of $Dst$ and $Kp$ indices from interplanetary magnetic field data and solar wind parameters. 
 
 \subsection{Probabilistic Forecasting}
-%Talk about need for probabilistic forecasts.ny
+%DIF < Talk about need for probabilistic forecasts.
+%DIF > Talk about need for probabilistic forecasts.ny
 Although much research has been done on prediction of the $Dst$ index, much less has been done on probabilistic forecasting of $Dst$. One such work described in \citet{McPherron:2013} involves identification of high speed solar wind streams using the WSA model, using predictions of high speed streams to construct ensembles of $Dst$ trajectories which yield the quartiles of $Dst$ time series. 
 
-Probabilistic forecasting is of particular importance in geophysics applications as the end users of forecasts often require confidence bounds on the said forecasts. It is in this context where \emph{Gaussian Processes} become especially attractive due to their inherent probabilistic formulation and tractability of exact inference.
+Probabilistic forecasting is of particular importance in geophysics applications as the end users of forecasts often require confidence bounds on the said forecasts. It is in this context where \emph{Gaussian Processes} become especially attractive due to their inherent probabilistic formulation and tractability of \DIFdelbegin \DIFdel{analytical }\DIFdelend \DIFaddbegin \DIFadd{exact }\DIFaddend inference.
 
 
 \section{Gaussian Processes}
@@ -110,8 +177,8 @@ A \emph{Gaussian Process} model represents the finite dimensional probability di
 \end{align}
 
 In order to uniquely define the distribution of $\mathbf{f}$, it is
-required to specify the mean $\mathbf{m}$ and the covariance matrix
-$\mathbf{K}$. For this probability density to be valid, there are further requirements imposed on $\mathbf{K}$: 
+required to specify \DIFaddbegin \DIFadd{the mean }\DIFaddend $\mathbf{m}$ and \DIFaddbegin \DIFadd{the covariance matrix
+}\DIFaddend $\mathbf{K}$. For this probability density to be valid, there are further requirements imposed on $\mathbf{K}$: 
 
 \begin{enumerate}
       \item Symmetry: $\mathbf{K}_{ij} = \mathbf{K}_{ji} \ \forall i,j \in {1, \cdots, N} $ 
@@ -125,7 +192,7 @@ In \emph{Gaussian Processes} the individual elements of $\mathbf{x}$ and $\mathb
       \Lambda_{ij} = & \mathbb{E}[(f(\mathbf{x}_i) - \mu_i)(f(\mathbf{x}_j) - \mu_j)] := K(\mathbf{x}_i, \mathbf{x}_j)
 \end{align}
 
-In the machine learning community, $m(.)$ and $K(.,.)$ are known as the \emph{mean function} and \emph{covariance function} or \emph{kernel function} of the process respectively. Giving a closed form expression for $m(.)$ and $K(.,.)$ uniquely specifies a particular \emph{Gaussian Process} and so a GP model is often expressed in the following notation.
+In the machine learning community, $m(.)$ and $K(.,.)$ are known as the \emph{mean function} and \emph{covariance function} or \emph{kernel function} of the process respectively. Giving a closed form expression for $m(.)$ and $K(.,.)$ uniquely specifies a particular \emph{Gaussian Process} and so a GP model is often expressed \DIFdelbegin \DIFdel{notationally as shown below}\DIFdelend \DIFaddbegin \DIFadd{in the following notation}\DIFaddend .
 
 \begin{equation}
     f(\mathbf{x}) \sim \mathcal{GP}(m(\mathbf{x}), K(\mathbf{x}, \mathbf{x}'))
@@ -175,10 +242,10 @@ The simplest auto-regressive models for \emph{OSA} prediction of $Dst$ are those
 
 \subsection{Gaussian Process Auto-Regressive with eXogenous inputs (GP-ARX)} \label{sec:gparx}
 
-Auto-regressive models can be augmented by including exogenous quantities in the inputs $\mathbf{x}_{t-1}$ at each time step, in order to improve predictive accuracy. $Dst$ gives a measure of ring currents, which are modulated by plasma sheet particle injections into the inner magnetosphere during substorms. Studies have shown that the substorm occurrence rate increases with solar wind velocity (high speed streams) \citet{Kissinger2011,Newell2016}. Prolonged southward interplanetary magnetic field (IMF) $z$-component ($B_z$) is needed for sub-storms to occur \citet{McPherron1986}. An increase in the solar wind electric field, $V_{sw}B_z$, can increase the dawn-dusk electric field in the magnetotail, which in turn determines the amount of plasma sheet particle that move to the inner magnetosphere \citet{Friedel2001}. Therefore, our exogenous parameters consist of solar wind velocity $V_{sw}$ and IMF $B_z$.   
+Auto-regressive models can be augmented by including exogenous quantities in the inputs $\mathbf{x}_{t-1}$ at each time step, in order to improve predictive accuracy. $Dst$ gives a measure of ring currents, which are modulated by plasma sheet particle injections into the inner magnetosphere during \DIFdelbegin \DIFdel{sub-storms}\DIFdelend \DIFaddbegin \DIFadd{substorms}\DIFaddend . Studies have shown that the substorm occurrence rate increases with solar wind velocity (high speed streams) \citet{Kissinger2011,Newell2016}. Prolonged southward interplanetary magnetic field (IMF) $z$-component ($B_z$) is needed for sub-storms to occur \citet{McPherron1986}. An increase in the solar wind electric field, $V_{sw}B_z$, can increase the dawn-dusk electric field in the magnetotail, which in turn determines the amount of plasma sheet particle that move to the inner magnetosphere \citet{Friedel2001}. Therefore, our exogenous parameters consist of solar wind velocity $V_{sw}$ and IMF $B_z$.   
 
 In this model we choose distinct time lags $p$, $p_{v}$ and $p_{b}$ for $Dst$, $V$ and $B_z$ respectively.
-    
+
 \begin{align*}
        \mathbf{x}_{t-1} & = (Dst(t-1), \cdots , Dst(t-p+1), \\
         & \ \ \ \ \  V_{sw}(t-1), \cdots, V_{sw}(t-p_{v}+1),\\
@@ -203,20 +270,20 @@ For the success of a \emph{Gaussian Process} model an appropriate choice of kern
  Name  & Expression & Hyperparameters  \\
 \hline
   Radial Basis Function (RBF)  & $\frac{1}{2} exp(-||\mathbf{x} - \mathbf{y}||^2/l^2)$  & $l \in \mathbb{R}$   \\
-  
+
   Polynomial  & $(\mathbf{x}^\intercal \mathbf{y} + b)^d$ & $b \in \mathbb{R}, d \in \mathbb{N}$   \\
-  
+
   Laplacian  & $exp(-||\mathbf{x} - \mathbf{y}||_{1}/\theta)$  & $\theta \in \mathbb{R}^+$  \\
-  
+
   Student's T  & $1/(1 + ||\mathbf{x} - \mathbf{y}||_{2}^d)$ & $d \in \mathbb{R}^{+}$\\
-  
+
   Maximum Likelihood Perceptron  & $sin^{-1}(\frac{w\mathbf{x}^\intercal \mathbf{y} + b}{\sqrt{w\mathbf{x}^\intercal \mathbf{x} + b + 1} \sqrt{w\mathbf{y}^\intercal \mathbf{y} + b + 1}})$ & $w, b \in \mathbb{R}^{+}$\\
 \hline
 \end{tabular}
 \label{table:kernel}
 \end{table}
 
-The quantities $l$ in the RBF, and $b$ and $d$ in the polynomial kernel are known as \emph{hyperparameters}. Hyperparameters give flexibility to a particular kernel structure, for example $d = 1, 2, 3, \cdots$ in the polynomial kernel represents linear, quadratic, cubic and higher order polynomials respectively. The process of assigning values to the \emph{hyperparameters} is crucial in the model building process and is known as \emph{model selection}. 
+The quantities $l$ in the RBF, and $b$ and $d$ in the polynomial kernel are known as \emph{\DIFdelbegin \DIFdel{hyper-parameters}\DIFdelend \DIFaddbegin \DIFadd{hyperparameters}\DIFaddend }. \DIFdelbegin \DIFdel{Hyper-parameters }\DIFdelend \DIFaddbegin \DIFadd{Hyperparameters }\DIFaddend give flexibility to a particular kernel structure, for example $d = 1, 2, 3, \cdots$ in the polynomial kernel represents linear, quadratic, cubic and higher order polynomials respectively. The process of assigning values to the \emph{\DIFdelbegin \DIFdel{hyper-parameters}\DIFdelend \DIFaddbegin \DIFadd{hyperparameters}\DIFaddend } is crucial in the model building process and is known as \emph{model selection}. 
 
 In this text, we construct GPR models with a combination of the \emph{maximum likelihood perceptron} kernel and \emph{student's T} kernel as shown in equations (\ref{eq:usedKernel}). The \emph{maximum likelihood perceptron} kernel is the \emph{Gaussian Process} equivalent of a single hidden layer feed-forward neural network model as demonstrated in \citet{Neal:1996:BLN:525544}.
 
@@ -227,12 +294,12 @@ In this text, we construct GPR models with a combination of the \emph{maximum li
 \end{align}
 
 
-\subsection{Model Selection: Hyperparameters}
+\subsection{Model Selection: \DIFdelbegin \DIFdel{Hyper-parameters}\DIFdelend \DIFaddbegin \DIFadd{Hyperparameters}\DIFaddend }
 
 Given a GPR model with a kernel function $K_\theta$, the problem of
 model selection consists of finding appropriate values for the kernel
-hyperparameters $\theta = \left(\theta_1, \theta_2, \cdots, \theta_i\right)$.  In order to assign a value to $\theta$, we must
-define an objective function ($Q(\theta)$) which represents our confidence that the GP model built from a particular value of $\theta$ is the best performing model. Since GP models are constructed from assumptions about the conditional probability distribution of the data $p(\mathbf{y}|\mathbf{X})$, it is natural to use the negative log-likelihood of the training data as a model selection criterion. 
+\DIFdelbegin \DIFdel{hyper-parameters }\DIFdelend \DIFaddbegin \DIFadd{hyperparameters }\DIFaddend $\theta = \left(\theta_1, \theta_2, \cdots, \theta_i\right)$.  In order to assign a value to $\theta$, we must
+define an objective function \DIFaddbegin \DIFadd{($Q(\theta)$) }\DIFaddend which represents our confidence that the GP model built from a particular value of $\theta$ is the best performing model. Since GP models are constructed from assumptions about the conditional probability distribution of the data $p(\mathbf{y}|\mathbf{X})$, it is natural to use the negative log-likelihood of the training data as a model selection criterion. 
 
 \begin{align*}
   Q(\theta) & = - log \ p(\mathbf{y}|\mathbf{X}, \theta) \\
@@ -248,19 +315,20 @@ The model selection problem can now be expressed as the minimization problem sho
 
 \citet{Rasmussen:2005:GPM:1162254} note that there are ready interpretations to the three terms which add up to give $Q(.)$. The first term $\frac{1}{2} \mathbf{y}^\intercal (\mathbf{K}_\theta + \sigma^{2} \mathbf{I})^{-1} \mathbf{y}$ quantifies the fit of the model with respect to the training data, the second term $\frac{1}{2}|\mathbf{K}_\theta + \sigma^{2} \mathbf{I}|$ is a complexity penalty, in non-parametric models such as \emph{Gaussian Processes} the model complexity grows with the number of training data points $N$. The third term $\frac{N}{2}log(2\pi)$ is a normalization term.
 
-The objective function $Q(\theta)$ can have multiple local minima, and evaluating the value of $Q(.)$ at any given $\theta$ requires inversion of the matrix $\mathbf{K}_\theta + \sigma^{2} \mathbf{I}$ which has a time complexity $O(N^3)$ as noted above. In the interest of saving computational cost, one cannot use exhaustive search through the domain of the hyperparameters to inform our choice for $\theta$.
+The objective function $Q(\theta)$ can have multiple local minima, and evaluating the value of $Q(.)$ at any given $\theta$ requires inversion of the matrix $\mathbf{K}_\theta + \sigma^{2} \mathbf{I}$ which has a time complexity $O(N^3)$ as noted above. In the interest of saving computational cost, one cannot use exhaustive search through the domain of the \DIFdelbegin \DIFdel{hyper-parameters }\DIFdelend \DIFaddbegin \DIFadd{hyperparameters }\DIFaddend to inform our choice for $\theta$.
 
 The model selection problem has historically received less attention
 due to a combination of difficulty and numerous design decisions like
 choice of hyper-parameter optimization techniques, which makes model
 selection as much of an art as science. 
+\DIFaddbegin 
 
-Choosing a suitable heuristic or algorithm for model selection for GP
+\DIFaddend Choosing a suitable heuristic or algorithm for model selection for GP
 models is quite often a balancing exercise between the computational
 limitations of the modeler and the need to explore the hyper-parameter
 space in a manner that yields a satisfactory predictive model. Some of
 the techniques used for model selection in the context of GPR include
-the following.
+\DIFaddbegin \DIFadd{the following}\DIFaddend .
 
 
 \subsubsection*{Grid Search}
@@ -296,11 +364,11 @@ Although gradient based \emph{Maximum Likelihood} looks very similar to the \emp
 
 \subsection{Model Selection: Auto-regressive Order}
 
-Apart from having a practical method for choosing values of kernel hyperparameters, we must also address the issue of choosing the time delays $p$ and $p_v, p_b$ for the GP-AR and GP-ARX models. One might argue that we group these quantities with the kernel hyperparameters in the model selection procedure, in the context of the GP-AR and GP-ARX models there is one reason why this might not be beneficial. 
+Apart from having a practical method for choosing values of kernel \DIFdelbegin \DIFdel{hyper-parameters}\DIFdelend \DIFaddbegin \DIFadd{hyperparameters}\DIFaddend , we must also address the issue of choosing the time delays $p$ and $p_v, p_b$ for the GP-AR and GP-ARX models. One might argue that we group these quantities with the kernel \DIFdelbegin \DIFdel{hyper-parameters }\DIFdelend \DIFaddbegin \DIFadd{hyperparameters }\DIFaddend in the model selection procedure, in the context of the GP-AR and GP-ARX models there is one reason why this might not be beneficial. 
 
-The value of kernel hyperparameters $\theta^*$ which maximise the marginal likelihood $Q(.)$ are conditional on the chosen model orders $p$ and $p, p_v, p_b$ for GP-AR and GP-ARX respectively. Since the model orders determine the size of the input space of the predictive models, they influence the values of characteristic length scales and other kernel hyperparameters which yield a good fit.
+The value of kernel \DIFdelbegin \DIFdel{hyper-parameters }\DIFdelend \DIFaddbegin \DIFadd{hyperparameters }\DIFaddend $\theta^*$ which maximise the marginal likelihood $Q(.)$ are conditional on the chosen model orders $p$ and $p, p_v, p_b$ for GP-AR and GP-ARX respectively. Since the model orders determine the size of the input space of the predictive models, they influence the values of characteristic length scales and other kernel \DIFdelbegin \DIFdel{hyper-parameters }\DIFdelend \DIFaddbegin \DIFadd{hyperparameters }\DIFaddend which yield a good fit.
 
-Not only do the model orders influence the value of kernel hyperparameters $\theta^*$ which maximise model fit, but increasing values of $p, p_v, p_b$ also make it more difficult for the model selection algorithms to search the hyper-parameter space, due to the curse of dimensionality.
+Not only do the model orders influence the value of kernel \DIFdelbegin \DIFdel{hyper-parameters }\DIFdelend \DIFaddbegin \DIFadd{hyperparameters }\DIFaddend $\theta^*$ which maximise model fit, but increasing values of $p, p_v, p_b$ also make it more difficult for the model selection algorithms to search the hyper-parameter space, due to the curse of dimensionality.
 
 An empirical way to choose the values of $p, p_v, p_b$ for the GP-AR and GP-ARX models is by choosing an independent validation data set which is used to evaluate the GP models obtained from the model selection procedures of the previous section. It is then possible for the modeler to choose these model orders in way to balance performance and dimensionality of input features.
 
@@ -317,7 +385,7 @@ We selected OMNI data sections 00:00 January 3 2010 to 23:00 January 23 2010 and
 
 \item \textbf{Choice of model components}:  Kernel, mean function, model selection procedure. 
 
-We choose a kernel $K_{osa}$ of the form given in equation \ref{eq:usedKernel}. In order to find appropriate values of the hyperparameters of $K_{osa}$, we apply \emph{grid search}, \emph{coupled simulated annealing} and \emph{maximum likelihood} methods. We fix the parameters $d$ and $\sigma^2$ of $K_{st}$ and model noise to values $0.01$ and $0.2$ respectively, the remaining parameters $w$ and $b$ are kept free to be calculated by model selection. Table \ref{table:modelselection} summarizes the settings used to run each model selection procedure.
+We choose a kernel $K_{osa}$ of the form given in equation \ref{eq:usedKernel}. In order to find appropriate values of the \DIFdelbegin \DIFdel{hyper-parameters }\DIFdelend \DIFaddbegin \DIFadd{hyperparameters }\DIFaddend of $K_{osa}$, we apply \emph{grid search}, \emph{coupled simulated annealing} and \emph{maximum likelihood} methods. We fix the parameters $d$ and $\sigma^2$ of $K_{st}$ and model noise to values $0.01$ and $0.2$ respectively, the remaining parameters $w$ and $b$ are kept free to be calculated by model selection. Table \ref{table:modelselection} summarizes the settings used to run each model selection procedure.
 
 \item \textbf{Choice of Performance Metrics}: To compare the performance of GP and GP-ARX models of varying auto-regressive orders, their predictive performance during the validation (and later final evaluation) phase must be calculated using some clearly defined metrics. We use the following as performance metrics for our modeling experiments.
 
@@ -337,14 +405,14 @@ We choose a kernel $K_{osa}$ of the form given in equation \ref{eq:usedKernel}. 
 \end{enumerate}
 
 
-\item \textbf{Model Order Selection}: In order to find appropriate values for the auto-regressive time lags $p, p_v, p_b$ for $Dst$, solar wind speed and IMF $B_z$ respectively, create models upto a certain maximum time lag i.e. $3 \leq p \leq 8$ for GP-AR and $3 \leq p + p_v + p_b \leq 8$ for GP-ARX. For each such model perform the model selection routine to select values of the kernel hyperparameters and evaluate the resultant model on the validation set. Choose the value of $p, p_v, p_b$ which maximises predictive performance on the validation set.
+\item \textbf{Model Order Selection}: In order to find appropriate values for the auto-regressive time lags $p, p_v, p_b$ for $Dst$, solar wind speed and IMF $B_z$ respectively, create models upto a certain maximum time lag i.e. $3 \leq p \leq 8$ for GP-AR and $3 \leq p + p_v + p_b \leq 8$ for GP-ARX. For each such model perform the model selection routine to select values of the kernel \DIFdelbegin \DIFdel{hyper-parameters }\DIFdelend \DIFaddbegin \DIFadd{hyperparameters }\DIFaddend and evaluate the resultant model on the validation set. Choose the value of $p, p_v, p_b$ which maximises predictive performance on the validation set.
 
-\item \textbf{Final Evaluation}: After selecting GP-AR and GP-ARX models with particular values of auto-regressive orders and kernel hyperparameters in the model selection phase, the best performing GP-AR and GP-ARX models are then evaluated on the test data set in order to get an unbiased picture of their predictive performance. In our case we use the already chosen test set outlined in table \ref{table:teststorms} for final model evaluation. The GP based OSA prediction models are compared against the naive \emph{Persistence} model which serves as a performance baseline for the OSA prediction of $Dst$.
+\item \textbf{Final Evaluation}: After selecting GP-AR and GP-ARX models with particular values of auto-regressive orders and kernel \DIFdelbegin \DIFdel{hyper-parameters }\DIFdelend \DIFaddbegin \DIFadd{hyperparameters }\DIFaddend in the model selection phase, the best performing GP-AR and GP-ARX models are then evaluated on the test data set in order to get an unbiased picture of their predictive performance. In our case we use the already chosen test set outlined in table \ref{table:teststorms} for final model evaluation. The GP based OSA prediction models are compared against the naive \emph{Persistence} model which serves as a performance baseline for the OSA prediction of $Dst$.
 
 \end{enumerate}
 
 \section{Practical Issues: Software}
- 
+
 Scientific computing, whether it be in the form of simulation, data analysis or modeling is brought to fruition through well thought choices and usage of software packages. \emph{Gaussian Processes} have been implemented in a number software distributions, we discuss two of them here.
 
 \begin{enumerate}
