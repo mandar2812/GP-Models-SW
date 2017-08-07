@@ -1,7 +1,7 @@
 \documentclass{article}
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL chap.tex              Tue Apr 25 12:57:20 2017
-%DIF ADD revised-chapter.tex   Fri Aug  4 18:19:54 2017
+%DIF ADD revised-chapter.tex   Mon Aug  7 12:06:12 2017
 
 \usepackage{amsmath}
 \usepackage{txfonts}
@@ -81,7 +81,14 @@
 
 \begin{abstract}
 
-In this chapter, we give the reader an \DIFdelbegin \DIFdel{indepth }\DIFdelend \DIFaddbegin \DIFadd{in depth }\DIFaddend view into building of probabilistic forecasting models for geomagnetic time series using the \emph{Gaussian Process} methodology outlined in the previous chapters. We highlight design decisions and practical issues \DIFaddbegin \DIFadd{that }\DIFaddend must be addressed in order to use \emph{Gaussian Process} models for probabilistic prediction of a quantity of interest. As a \DIFdelbegin \DIFdel{paedadogical }\DIFdelend \DIFaddbegin \DIFadd{pedagogical }\DIFaddend example, we formulate, train and test a family of \emph{Gaussian Process} Auto-Regressive models for one hour ahead prediction of the $Dst$ geomagnetic index.  
+In this chapter, we give the reader an \DIFdelbegin \DIFdel{indepth }\DIFdelend \DIFaddbegin \DIFadd{in depth }\DIFaddend view into building of
+probabilistic forecasting models for geomagnetic time series using the
+\emph{Gaussian Process} methodology outlined in the previous
+chapters. We highlight design decisions and practical issues \DIFaddbegin \DIFadd{that }\DIFaddend must
+be addressed in order to use \emph{Gaussian Process} models for
+probabilistic prediction of a quantity of interest. As a \DIFdelbegin \DIFdel{paedadogical }\DIFdelend \DIFaddbegin \DIFadd{pedagogical
+}\DIFaddend example, we formulate, train and test a family of \emph{Gaussian
+  Process} Auto-Regressive models for one hour ahead prediction of the $Dst$ geomagnetic index.  
 
 \end{abstract}
 
@@ -158,9 +165,26 @@ Probabilistic forecasting is of particular importance in geophysics applications
 
 \section{Gaussian Processes}
 
-\emph{Gaussian Processes} first appeared in machine learning research in \citet{Neal:1996:BLN:525544}, as the limiting case of Bayesian inference performed on neural networks with infinitely many neurons in the hidden layers. Although their inception in the machine learning community is recent, their origins can be traced back to the geo-statistics research community where they are known as \emph{Kriging} methods \citep{krige1951statistical}. In pure Mathematics, \emph{Gaussian Processes} have been studied extensively and their existence was first proven by Kolmogorov's extension theorem \citep{tao2011introduction}. The reader is referred to \citet{Rasmussen:2005:GPM:1162254} for an in depth treatment of Gaussian Processes in machine learning.
+\emph{Gaussian Processes} first appeared in machine learning research
+in \citet{Neal:1996:BLN:525544}, as the limiting case of Bayesian
+inference performed on neural networks with infinitely many neurons in
+the hidden layers. Although their inception in the machine learning
+community is recent, their origins can be traced back to the
+geo-statistics research community where they are known as
+\emph{Kriging} methods \citep{krige1951statistical}. In pure
+Mathematics, \emph{Gaussian Processes} have been studied extensively
+and their existence was first proven by Kolmogorov's extension theorem
+\citep{tao2011introduction}. The reader is referred to
+\citet{Rasmussen:2005:GPM:1162254} for an in depth treatment of
+Gaussian Processes in machine learning. \DIFaddbegin \DIFadd{In space weather forecasting
+literature }\emph{\DIFadd{Gaussian Process Regression}} \DIFadd{has been used for one
+hour ahead prediction of the Dst index \mbox{%DIFAUXCMD
+\citep{SWE:SWE20479}}%DIFAUXCMD
+.
+}\DIFaddend 
 
-Without going into too many details, we give a quick recap of the formulation and exact inference in \emph{Gaussian Process Regression} (GPR) models. 
+Without going into too many details, we give a quick recap of the
+formulation and exact inference in \emph{Gaussian Process Regression} (GPR) models. 
 
 \subsection{Gaussian Process Regression: Formulation}
 
@@ -260,7 +284,7 @@ Mean functions in GPR models encode trends in the data, they are the baseline pr
 
 \subsection{Choice of Kernel}
 
-For the success of a \emph{Gaussian Process} model an appropriate choice of kernel function is paramount. The symmetry and positive semi-definiteness of \emph{Gaussian Process} kernels implies that they represent inner-products between some basis function representation of the data. The interested reader is suggested to refer to \citet{Berlinet2004}, \citet{Scholkopf:2001:LKS:559923} and \citet{hofmann2008} for a thorough treatment of kernel functions and the rich theory behind them. Some common kernel functions used in machine learning are listed in Table \ref{table:kernel}.
+For the success of a \emph{Gaussian Process} model an appropriate choice of kernel function is paramount. The symmetry and positive semi-definiteness of \emph{Gaussian Process} kernels implies that they represent inner-products between some basis function representation of the data. The interested reader is suggested to refer to \citet{Berlinet2004}, \citet{Scholkopf:2001:LKS:559923} and \citet{hofmann2008} for a thorough treatment of kernel functions and the rich theory behind them. Some common kernel functions used in machine learning are listed in \DIFdelbegin \DIFdel{Table }\DIFdelend \DIFaddbegin \DIFadd{table }\DIFaddend \ref{table:kernel}.
 
 \begin{table}[h]
 \caption{Popular Kernel functions used in GPR models}
@@ -283,7 +307,7 @@ For the success of a \emph{Gaussian Process} model an appropriate choice of kern
 \label{table:kernel}
 \end{table}
 
-The quantities $l$ in the RBF, and $b$ and $d$ in the polynomial kernel are known as \emph{\DIFdelbegin \DIFdel{hyper-parameters}\DIFdelend \DIFaddbegin \DIFadd{hyperparameters}\DIFaddend }. \DIFdelbegin \DIFdel{Hyper-parameters }\DIFdelend \DIFaddbegin \DIFadd{Hyperparameters }\DIFaddend give flexibility to a particular kernel structure, for example $d = 1, 2, 3, \cdots$ in the polynomial kernel represents linear, quadratic, cubic and higher order polynomials respectively. The process of assigning values to the \emph{\DIFdelbegin \DIFdel{hyper-parameters}\DIFdelend \DIFaddbegin \DIFadd{hyperparameters}\DIFaddend } is crucial in the model building process and is known as \emph{model selection}. 
+The quantities $l$ in the \DIFdelbegin \DIFdel{RBF}\DIFdelend \DIFaddbegin \emph{\DIFadd{Radial Basis Function kernel}}\DIFaddend , and $b$ and $d$ in the polynomial kernel are known as \emph{\DIFdelbegin \DIFdel{hyper-parameters}\DIFdelend \DIFaddbegin \DIFadd{hyperparameters}\DIFaddend }. \DIFdelbegin \DIFdel{Hyper-parameters }\DIFdelend \DIFaddbegin \DIFadd{Hyperparameters }\DIFaddend give flexibility to a particular kernel structure, for example $d = 1, 2, 3, \cdots$ in the polynomial kernel represents linear, quadratic, cubic and higher order polynomials respectively. The process of assigning values to the \emph{\DIFdelbegin \DIFdel{hyper-parameters}\DIFdelend \DIFaddbegin \DIFadd{hyperparameters}\DIFaddend } is crucial in the model building process and is known as \emph{model selection}. 
 
 In this text, we construct GPR models with a combination of the \emph{maximum likelihood perceptron} kernel and \emph{student's T} kernel as shown in equations (\ref{eq:usedKernel}). The \emph{maximum likelihood perceptron} kernel is the \emph{Gaussian Process} equivalent of a single hidden layer feed-forward neural network model as demonstrated in \citet{Neal:1996:BLN:525544}.
 
@@ -380,7 +404,7 @@ Section \ref{sec:modeldesign} brings together all the practical issues with resp
 
 \item \textbf{Data Preprocessing}: Three seperate data sets for model training and hyper-parameter selection, model order selection and model evaluation must be created. Care must be taken that the size of the training sets does not delay the processes of kernel hyper-parameter selection. The training, validation and test data sets created from this procedure must all contain non-overlapping geomagnetic storm events. 
 
-We selected OMNI data sections 00:00 January 3 2010 to 23:00 January 23 2010 and 20:00 August 5 2011 to 22:00 August 6 2011 for training the GP-AR and GP-ARX models. The first training data section consists of ambient fluctuations of $Dst$ while the second contains a geomagnetic storm. A set of 24 storm events listed in Table \ref{table:validationstorms} is kept aside as a validation data set for selecting model orders $p, p_v, p_b$ while a list of 63 storm events listed in table \ref{table:teststorms} is used for final model evaluation.
+We selected OMNI data sections 00:00 January 3 2010 to 23:00 January 23 2010 and 20:00 August 5 2011 to 22:00 August 6 2011 for training the GP-AR and GP-ARX models. The first training data section consists of ambient fluctuations of $Dst$ while the second contains a geomagnetic storm. A set of 24 storm events listed in \DIFdelbegin \DIFdel{Table }\DIFdelend \DIFaddbegin \DIFadd{table }\DIFaddend \ref{table:validationstorms} is kept aside as a validation data set for selecting model orders $p, p_v, p_b$ while a list of 63 storm events listed in table \ref{table:teststorms} is used for final model evaluation.
 
 
 \item \textbf{Choice of model components}:  Kernel, mean function, model selection procedure. 
@@ -428,7 +452,7 @@ After running the workflow steps as outlined in section \ref{sec:workflow} above
 
 \subsection*{Model Selection \& Validation Performance}
 
-Figures \ref{fig:CompareMae} and \ref{fig:CompareCC} show how the mean absolute error and coefficient of correlation as calculated on the validation set storm events of Table \ref{table:validationstorms}, vary with increasing model order for GP-AR and GP-ARX. The results are represented as box and whisker plots, in which a rectangle is drawn to represent the first and third quartiles, with a horizontal line inside to indicate the median value, outlying points are shown as dots while the whiskers indicate the smallest and largest non-outliers. In both cases, the predictive performance first improves and then stagnates or worsens with increasing model order. 
+Figures \ref{fig:CompareMae} and \ref{fig:CompareCC} show how the mean absolute error and coefficient of correlation as calculated on the validation set storm events of \DIFdelbegin \DIFdel{Table }\DIFdelend \DIFaddbegin \DIFadd{table }\DIFaddend \ref{table:validationstorms}, vary with increasing model order for GP-AR and GP-ARX. The results are represented as box and whisker plots, in which a rectangle is drawn to represent the first and third quartiles, with a horizontal line inside to indicate the median value, outlying points are shown as dots while the whiskers indicate the smallest and largest non-outliers. In both cases, the predictive performance first improves and then stagnates or worsens with increasing model order. 
 
 \begin{figure}[h]
 \includegraphics[width=\textwidth]{Compare-mae.png}
@@ -464,7 +488,7 @@ Figures \ref{fig:CompareMaeARX} and \ref{fig:CompareCCARX} break down the result
 
 \subsection*{Final Evaluation}
 
-After choosing the best performing GP-AR and GP-ARX models, we calculate their performance on the test set of Table \ref{table:teststorms}. The results of these model evaluations are summarized in Table \ref{table:results}, the GP-AR and GP-ARX models improve upon the performance of the \emph{persistence model}.
+After choosing the best performing GP-AR and GP-ARX models, we calculate their performance on the test set of \DIFdelbegin \DIFdel{Table }\DIFdelend \DIFaddbegin \DIFadd{table }\DIFaddend \ref{table:teststorms}. The results of these model evaluations are summarized in \DIFdelbegin \DIFdel{Table }\DIFdelend \DIFaddbegin \DIFadd{table }\DIFaddend \ref{table:results}, the GP-AR and GP-ARX models improve upon the performance of the \emph{persistence model}.
 
 \subsection*{Sample Predictions with Error Bars}
 
@@ -499,23 +523,42 @@ Figures \ref{fig:ComparePred1}, \ref{fig:ComparePred2} and \ref{fig:ComparePred3
 
 \begin{table}[h]
 \centering
-\caption{Settings of model selection procedures}
-\begin{tabular}{l c c c}
-\hline
-Procedure & Grid Size & Step & Max Iterations \\
-\hline
-Grid Search & 10 & 0.2 & NA \\
-Coupled Simulated Annealing & 4 & 0.2 & 30 \\
-Maximum likelihood & NA & 0.2 & 150\\
-\end{tabular}
-\label{table:modelselection}
-\end{table}
+\DIFdelbeginFL %DIFDELCMD < \caption{%
+{%DIFAUXCMD
+\DIFdelFL{Settings of model selection procedures}}
+%DIFAUXCMD
+%DIFDELCMD < \begin{tabular}{l c c c}
+%DIFDELCMD < \hline
+%DIFDELCMD < %%%
+\DIFdelFL{Procedure }%DIFDELCMD < & %%%
+\DIFdelFL{Grid Size }%DIFDELCMD < & %%%
+\DIFdelFL{Step }%DIFDELCMD < & %%%
+\DIFdelFL{Max Iterations }%DIFDELCMD < \\
+%DIFDELCMD < \hline
+%DIFDELCMD < %%%
+\DIFdelFL{Grid Search }%DIFDELCMD < & %%%
+\DIFdelFL{10 }%DIFDELCMD < & %%%
+\DIFdelFL{0.2 }%DIFDELCMD < & %%%
+\DIFdelFL{NA }%DIFDELCMD < \\
+%DIFDELCMD < %%%
+\DIFdelFL{Coupled Simulated Annealing }%DIFDELCMD < & %%%
+\DIFdelFL{4 }%DIFDELCMD < & %%%
+\DIFdelFL{0.2 }%DIFDELCMD < & %%%
+\DIFdelFL{30 }%DIFDELCMD < \\
+%DIFDELCMD < %%%
+\DIFdelFL{Maximum likelihood }%DIFDELCMD < & %%%
+\DIFdelFL{NA }%DIFDELCMD < & %%%
+\DIFdelFL{0.2 }%DIFDELCMD < & %%%
+\DIFdelFL{150}%DIFDELCMD < \\
+%DIFDELCMD < \end{tabular}
+%DIFDELCMD < \label{table:modelselection}
+%DIFDELCMD < \end{table}
+%DIFDELCMD < 
 
-
-
-\begin{table}[h]
-\centering
-\caption{Storm events used for model selection of GP-AR and GP-ARX}
+%DIFDELCMD < \begin{table}[h]
+%DIFDELCMD < \centering
+%DIFDELCMD < %%%
+\DIFdelendFL \caption{Storm events used for model selection of GP-AR and GP-ARX}
 \label{table:validationstorms}
 \begin{tabular}{llllll}
 \hline
@@ -620,9 +663,21 @@ Event Id & Start Date & Start Time & End Date & End Time & min. Dst \\ \hline
 62 & 2006/04/13 & 2000 & 2006/04/14 & 2300 & -111 \\
 63 & 2006/12/14 & 2100 & 2006/12/16 & 0300 & -147 \\ \hline
 \end{tabular}%
-\end{table}
+\DIFaddbeginFL \end{table}
 
-
+\begin{table}[h]
+\centering
+\caption{\DIFaddFL{Settings of model selection procedures}}
+\begin{tabular}{l c c c}
+\hline
+\DIFaddFL{Procedure }& \DIFaddFL{Grid Size }& \DIFaddFL{Step }& \DIFaddFL{Max Iterations }\\
+\hline
+\DIFaddFL{Grid Search }& \DIFaddFL{10 }& \DIFaddFL{0.2 }& \DIFaddFL{NA }\\
+\DIFaddFL{Coupled Simulated Annealing }& \DIFaddFL{4 }& \DIFaddFL{0.2 }& \DIFaddFL{30 }\\
+\DIFaddFL{Maximum likelihood }& \DIFaddFL{NA }& \DIFaddFL{0.2 }& \DIFaddFL{150}\\
+\end{tabular}
+\label{table:modelselection}
+\DIFaddendFL \end{table}
 
 \begin{table}[h]
 \centering
