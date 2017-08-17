@@ -1,7 +1,7 @@
 \documentclass{article}
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL chap.tex              Tue Apr 25 12:57:20 2017
-%DIF ADD revised-chapter.tex   Wed Aug 16 18:49:34 2017
+%DIF ADD revised-chapter.tex   Wed Aug 16 19:34:49 2017
 
 \usepackage{amsmath}
 \usepackage{txfonts}
@@ -333,7 +333,13 @@ define an objective function \DIFaddbegin \DIFadd{($Q(\theta)$) }\DIFaddend whic
   \mathbf{K}_\theta & = [K_{\theta}(\mathbf{x}_i, \mathbf{x}_j)]_{N \times N}
 \end{align*}
 
-The model selection problem can now be expressed as the minimization problem shown below.
+\DIFaddbegin \DIFadd{Since a GP model expresses prior assumptions about the finite
+dimensional distribution of the quantitiy of interest, the expression
+for $Q(\theta)$ follows directly from the expression of the
+probability density function of a multivariate gaussian.
+}
+
+\DIFaddend The model selection problem can now be expressed as the minimization problem shown below.
 
 \begin{align*}
   \theta^* = arg\min_{\theta} \ Q(\theta)
@@ -545,12 +551,10 @@ Figures \ref{fig:ComparePred1}, \ref{fig:ComparePred2} and \ref{fig:ComparePred3
   \label{fig:ComparePred3}
 \end{figure}
 
-
-
-
-\begin{table}[h]
-  \centering
-  \DIFdelbeginFL %DIFDELCMD < \caption{%
+\DIFdelbegin %DIFDELCMD < \begin{table}[h]
+%DIFDELCMD < \centering
+%DIFDELCMD < %%%
+%DIFDELCMD < \caption{%
 {%DIFAUXCMD
 \DIFdelFL{Settings of model selection procedures}}
 %DIFAUXCMD
@@ -580,12 +584,50 @@ Figures \ref{fig:ComparePred1}, \ref{fig:ComparePred2} and \ref{fig:ComparePred3
 %DIFDELCMD < \end{tabular}
 %DIFDELCMD < \label{table:modelselection}
 %DIFDELCMD < \end{table}
-%DIFDELCMD < 
-
-%DIFDELCMD < \begin{table}[h]
-%DIFDELCMD < \centering
 %DIFDELCMD < %%%
-\DIFdelendFL \caption{Storm events used for model selection of GP-AR and GP-ARX}
+\DIFdelend \DIFaddbegin \section{\DIFadd{Conclusion}}
+\DIFaddend 
+
+\DIFaddbegin \DIFadd{In this chapter, we introduced the reader to the }\emph{\DIFadd{Gaussian
+  Process}} \DIFadd{prediction methodology in the context of space weather forecasting.
+}
+
+\DIFadd{In order to successfully apply a Gaussian Process model for a
+prediction problem, there are a number of design choices which the
+modeler must take. These include choice of model trend, kernel, and
+hyperparameter selection among others, we gave a detailed
+description of each step of the process from the data to a operational
+Gaussian Process forecast model.
+}
+
+\DIFadd{To eludicate each step of the modeling workflow, we
+considered as an example, one hour ahead prediction of the Dst
+index.
+}
+
+\DIFadd{We demonstrated that in the one hour ahead Dst prediction
+context GP models yield reliable probabilistic predictions with
+relatively small data sizes: the training set contains 243
+instances, while the validation set contains 782 instances.
+}
+
+\DIFadd{To understand how well the models perform, their performance is
+compared with the trivial one hour ahead baseline; the
+}\emph{\DIFadd{persistence model}}\DIFadd{. The GP-AR and GP-ARX both improved on the
+performance of the }\emph{\DIFadd{persistence model}}\DIFadd{.
+}
+
+\emph{\DIFadd{Gaussian Processes}} \DIFadd{present the data driven space weather practitioner with
+a tractable and expressive method for generating probabilistic
+forecasts of geomagnetic time series. Leveraging the strengths of the
+Bayesian approach, they are able to learn robust predictors from data.
+}
+
+
+
+\DIFaddend \begin{table}[h]
+  \centering
+  \caption{Storm events used for model selection of GP-AR and GP-ARX}
   \label{table:validationstorms}
   \begin{tabular}{llllll}
     \hline

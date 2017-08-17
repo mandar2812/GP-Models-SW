@@ -261,6 +261,11 @@ define an objective function ($Q(\theta)$) which represents our confidence that 
   \mathbf{K}_\theta & = [K_{\theta}(\mathbf{x}_i, \mathbf{x}_j)]_{N \times N}
 \end{align*}
 
+Since a GP model expresses prior assumptions about the finite
+dimensional distribution of the quantitiy of interest, the expression
+for $Q(\theta)$ follows directly from the expression of the
+probability density function of a multivariate gaussian.
+
 The model selection problem can now be expressed as the minimization problem shown below.
 
 \begin{align*}
@@ -465,6 +470,36 @@ Figures \ref{fig:ComparePred1}, \ref{fig:ComparePred2} and \ref{fig:ComparePred3
   \label{fig:ComparePred3}
 \end{figure}
 
+\section{Conclusion}
+
+In this chapter, we introduced the reader to the \emph{Gaussian
+  Process} prediction methodology in the context of space weather forecasting.
+
+In order to successfully apply a Gaussian Process model for a
+prediction problem, there are a number of design choices which the
+modeler must take. These include choice of model trend, kernel, and
+hyperparameter selection among others, we gave a detailed
+description of each step of the process from the data to a operational
+Gaussian Process forecast model.
+
+To eludicate each step of the modeling workflow, we
+considered as an example, one hour ahead prediction of the Dst
+index.
+
+We demonstrated that in the one hour ahead Dst prediction
+context GP models yield reliable probabilistic predictions with
+relatively small data sizes: the training set contains 243
+instances, while the validation set contains 782 instances.
+
+To understand how well the models perform, their performance is
+compared with the trivial one hour ahead baseline; the
+\emph{persistence model}. The GP-AR and GP-ARX both improved on the
+performance of the \emph{persistence model}.
+
+\emph{Gaussian Processes} present the data driven space weather practitioner with
+a tractable and expressive method for generating probabilistic
+forecasts of geomagnetic time series. Leveraging the strengths of the
+Bayesian approach, they are able to learn robust predictors from data.
 
 
 
