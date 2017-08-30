@@ -1,0 +1,288 @@
+\documentclass{article}
+\begin{document}
+
+\title{Response Reviewer 1}
+\maketitle
+
+The author would like to thank the reviewer for the various comments
+and suggestions which greatly helped in improving the quality of the manuscript. 
+
+In the proceeding section they will find the revisions/responses for
+each concern outlined. The tracked changes are highlighted in the file \emph{differences.pdf}.
+
+\section*{Draft Comments \& Revisions}
+
+\begin{enumerate}
+
+\item{
+
+\fbox{%
+    \parbox{\textwidth}{%
+\textbf{Comment}: The abstract assumes that the readers are already introduced to the GP methodology from previous chapters.}
+}
+
+\textbf{Response}: I concur with the assertion, given the scope and
+organisation of the text it is not an unreasonable assumption. The
+chapter nevertheless strives to give a bare minimum theoretical
+treatment of Gaussian Process modelelling.
+
+}
+
+
+\item{
+  \fbox{%
+    \parbox{\textwidth}{%
+\textbf{Comment}: Replace $K_p$ with Kp}
+}
+
+\textbf{Response}: Appropriate changes made in the manuscript.
+
+}
+
+\item{
+  
+\fbox{%
+\parbox{\textwidth}{%
+\textbf{Comment}: Section 1, last paragraph. The SPDF is a repository
+for a wide variety of data sources from spacecrafts and ground-based
+instruments. It is not intended to forecast geomagnetic indices. It is
+intended for research and validation purposes only.
+}
+} 
+
+
+\textbf{Response}: Appropriate changes made in section 1, page 2.
+
+}
+
+\item{
+
+\fbox{%
+\parbox{\textwidth}{%
+
+\textbf{Comment}: Section 3. Can the author point to exactly why the
+Dst is chosen for this work as opposed to some other ground-based
+index? Perhaps also identify other tools and techniques for the
+prediction of other indices similar to the Dst. Also “state of the
+art” could be better said “other forecast alogrithms/models”. Some of
+the references are obsolete while many of them are unverified and have
+not transitioned to forecast models. The notable ones are the Wing et
+al. 2005 and Bala et al. 2009 which are operational in near-real
+time. Wing et al. 2005 was picked by NOAA SWPC for operational purpose.
+
+}
+} 
+
+
+\textbf{Response}: Since scope of the chapter is to illustrate how to
+apply GP methodology for space weather forecasting, the particular
+choice of geomagnetic index and its justification is tangential to the
+primary aim. That being said, it is evident from the introduction that
+the Dst index being a measure of geomagnetic disturbance strength is
+an important quantity and thus an easy choice for a case study.
+
+The changes with respect to forecast algorithms has been made on page
+3, section 2.1.
+}
+
+\item{
+
+\fbox{%
+\parbox{\textwidth}{%
+\textbf{Comment}: Section 3.2: more examples of probabilistic
+forecasting models in the space weather context would be relevant here.
+
+}
+} 
+
+
+\textbf{Response}: Changes made on page 3, section 2.2.
+
+
+}
+
+
+\item{
+
+\fbox{%
+\parbox{\textwidth}{%
+\textbf{Comment}: Section 4... Are there references in the space
+weather literature with applications involving this technique?
+}
+} 
+
+
+\textbf{Response}: A reference using the current technique has been
+added on page 4, section 4.
+
+
+}
+
+
+\item{
+
+\fbox{%
+\parbox{\textwidth}{
+
+\textbf{Comment}: Section 4.1: Given this will cover a broader
+audience, a sentence or two introducing the GP to the ML context would
+be relevant. Perhaps saying it as “this is a kernel-based, supervised
+learning approach that is good for prediction tasks” or such could
+make a nice segue into the section.
+
+}
+} 
+
+
+\textbf{Response}: Gaussian Processes have a rich theory intersecting
+areas of probability theory, functional analysis, linear
+operators and positive type functions. Because the multiple theoretical
+perspectives that can be used to introduce them, there is a chance of
+creating confusion for new practitioners especially those with less 
+mathematical experience. Thus it was deemed non-essential to mention
+terms such as "kernel-based, supervised learning approaches". The
+chapter nevertheless gives a basic introduction to kernel functions
+and their characteristics.
+
+
+}
+
+\item{
+    \fbox{
+      \parbox{\textwidth}{
+        \textbf{Comment}: Section 5: define OSA.
+$X_{t-1}$ having composed of the predicted index in the formulation can be
+precarious and can have some unintended consequences as a result. Dst
+is a slow response index to the changing IMF conditions. Applying time
+histories of the Dst index along with the prevailing IMF parameters
+will be an interesting prediction model at the outset- two causally
+coupled quantities with a large time lag (>1 hr) as inputs. It would
+be interesting to see a mere persistence model like the GPR comparing
+with this. It will also be nice to see a model that only takes the SW
+as inputs to predict the Dst index.
+
+        
+      }
+    }
+    \textbf{Response}: The persistence model has been compared with
+    the GP based models in table 5 on page 23. Due to strong
+    persistence behavior, the author believes that a model based
+    solely on solar wind inputs would not give attrative
+    performance. For that reason and for sake of brevity it has been
+    omitted from the chapter.
+
+}
+
+
+\item{
+    \fbox{
+      \parbox{\textwidth}{
+        \textbf{Comment}: Section 5.2: The author has chosen Vsw and
+        Bz to augment their original AR model. In predicting the Dst
+        index it is useful to bring in the dynamic pressure term or at
+        a minimum the density term from the SW parameters. Did the
+        author try to model that? It will be good to see the density
+        term added in their or a mention of why it was omitted. A
+        clarification is needed here.
+
+        
+      }
+    }
+    \textbf{Response}: Modifications made on page 6, section 4.4.
+
+}
+
+\item{
+    \fbox{
+      \parbox{\textwidth}{
+        \textbf{Comment}: Section 7.4, It is not clear how the GPARX
+        model number is chosen from the conditions shown here: 3 <= p
+        + pv + pb <= 8. However the validation shows that this is not
+        preserved. Can the author explain this?
+
+
+      }
+    }
+    \textbf{Response}: Modifications made on page 12, section 6.
+
+}
+
+\item{
+    \fbox{
+      \parbox{\textwidth}{
+        \textbf{Comment}: Figures 5 and 6 tend to indicate the problem
+        of persistence alluded to in my comment 8 above. It looks
+        (hard to tell from a b/w figure though) as if the prediction
+        is following the actual Dst. If this is indeed the case (again
+        please clarify this with a better plot or with color), the
+        model clearly misses the onset which is critical to a good
+        forecast model.
+
+      }
+    }
+    \textbf{Response}: Figures 5, 6 and 7 have been modified, also
+    effort was made to include a strong geomagnetic event in them.
+
+}
+
+\item{
+    \fbox{
+      \parbox{\textwidth}{
+        \textbf{Comment}: How does the results here compare to other
+        models of similar technique? Can the author also talk about
+        noise free observations if there is relevance here?
+
+
+      }
+    }
+    \textbf{Response}: Since the noise component in the model has
+    small variance, it is very close to the noise free paradigm. Since
+    is difficult to obtain codes for various space weather models and
+    since it is not the aim of the chapter to compare forecast models,
+    comparisons with other methods have been avoided. It is also worth
+    noting that a very large number of Dst forecast models are
+    deterministic forecasts and not probabilistic.
+
+}
+
+\item{
+    \fbox{
+      \parbox{\textwidth}{
+        \textbf{Comment}: Even though it may not be relevant here it
+        might be good to talk about the operational scalability of
+        this model to a real-time framework and any other key
+        considerations from a forecaster perspective.
+
+
+      }
+    }
+    \textbf{Response}: Although operational scalability of the
+    technique is not of relevance and not explicitly discussed,
+    on page 8 the reader is informed on the time complexity of GP
+    based inference.
+
+}
+
+\item{
+    \fbox{
+      \parbox{\textwidth}{
+        \textbf{Comment}: The title “many hours ahead prediction..”,
+        at least in my view, is slightly misleading. Generally this
+        refers to long-term predictions. But I find this as an
+        artifact of the GP process which only comes with familiarity
+        of the process itself.
+
+      }
+    }
+    \textbf{Response}: The title "many hours ahead prediction .." was
+    a working title and has been modified when submitting the first
+    draft of the chapter. Due to the online editorial system not being
+    able to reflect that modification there was a
+    miscommunication. The revised draft has an accurate chapter title.
+
+}
+
+\end{enumerate}
+
+
+\end{document}
