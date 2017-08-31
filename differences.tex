@@ -1,7 +1,7 @@
 \documentclass{article}
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL chap.tex              Tue Apr 25 12:57:20 2017
-%DIF ADD revised-chapter.tex   Wed Aug 30 22:12:45 2017
+%DIF ADD revised-chapter.tex   Thu Aug 31 12:13:10 2017
 
 \usepackage{amsmath}
 \usepackage{txfonts}
@@ -726,7 +726,12 @@ $Dst$, they can be condensed to form the following steps.
   orders, their predictive performance during the validation (and
   later final evaluation) phase must be calculated using some clearly
   defined metrics. We use the following as performance metrics for our
-  modeling experiments.
+  modeling experiments. \DIFaddbegin \DIFadd{The reader is advised to refer to
+  \mbox{%DIFAUXCMD
+\citet{wilks2011statistical} }%DIFAUXCMD
+for background on the various
+  performance metrics used in meteorologicaland space sciences.
+}\DIFaddend 
 
   \begin{enumerate}
   \item The mean absolute error.

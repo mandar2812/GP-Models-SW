@@ -1,0 +1,446 @@
+\documentclass{article}
+\begin{document}
+
+\title{Response Reviewer 2}
+\maketitle
+
+The author would like to thank the reviewer for the various comments
+and suggestions which greatly helped in improving the quality of the manuscript. 
+
+In the proceeding section they will find the revisions/responses for
+each concern outlined. The tracked changes are highlighted in the file \emph{differences.pdf}.
+
+\section*{Draft Comments \& Revisions}
+
+\begin{enumerate}
+
+\item{
+
+\fbox{%
+    \parbox{\textwidth}{%
+      \textbf{Comment}: Within the abstract the word ‘that’ is missing
+      from “We highlight design decisions and practical issues that
+      must be addressed...”
+
+    }
+  }
+
+\textbf{Response}: Modifications done.
+
+}
+
+\item{
+
+\fbox{%
+    \parbox{\textwidth}{%
+      \textbf{Comment}: When describing the magnetosphere, saying that
+      Earth’s field “dominates the magnetic field of outer space” is
+      vague. “Outer space” could be defined as outside the
+      heliosphere. Within the heliosphere the sun’s magnetic field is
+      dominant except for close to planets with their own planetary magnetospheres.
+    }
+  }
+
+\textbf{Response}: Changes made in section 1 on page 1.
+
+}
+
+\item{
+
+\fbox{%
+    \parbox{\textwidth}{%
+      \textbf{Comment}: I would suggest replacing “some popular
+      indices are” with “some common indices are.”
+    }
+  }
+
+\textbf{Response}: Changes done.
+
+}
+
+\item{
+
+\fbox{%
+    \parbox{\textwidth}{%
+      \textbf{Comment}: Typically we would say “quiet day curve”
+      instead of “calm day curve”
+    }
+  }
+
+\textbf{Response}: Changes made on page 1.
+
+}
+
+\item{
+
+\fbox{%
+    \parbox{\textwidth}{%
+      \textbf{Comment}: Ionosphere does not need to be capitalized in
+      the description of the AE index
+    }
+  }
+
+\textbf{Response}: Changes made on page 2.
+
+}
+
+\item{
+
+\fbox{%
+    \parbox{\textwidth}{%
+      \textbf{Comment}: Reword the Dst section as the first sentence
+      is confusion and difficult to read. Perhaps omitting “weakening
+      or strengthening” and just discussing how Dst measures the
+      strength of the ring current.
+    }
+  }
+
+\textbf{Response}: Changes made on page 2.
+
+}
+
+\item{
+
+\fbox{%
+    \parbox{\textwidth}{%
+      \textbf{Comment}: A geomagnetic storm with a Dst of ≤ 150 nT
+      would be quiet large. Typically smaller values are used to
+      indicate the occurrence of the geomagnetic storm (value of ≤ 100
+      nT or so). It might be good to include a reference here.
+    }
+  }
+
+\textbf{Response}: Changes made on page 2.
+
+}
+
+\item{
+
+\fbox{%
+    \parbox{\textwidth}{%
+      \textbf{Comment}: The space weather effects of geomagnetic
+      storms are much greater than just “their effects on
+      telecommunications infrastructure”. There are lots of other
+      effects that should be mentioned as well: the effects of the
+      power grid, satellites, GPS/GNSS, etc.
+    }
+  }
+
+\textbf{Response}: Modifications made on page 2.
+
+}
+
+\item{
+
+\fbox{%
+    \parbox{\textwidth}{%
+      \textbf{Comment}: “The principal data source for forecasting of
+      geomagnetic indices is the OMNI data set hosted by NASA...” This
+      sentence is wrong. For Kp ground-based magnetometers are used
+      and for Dst real- time data from L1 (from either the DSCOVR or
+      ACE satellite) is used. 
+    }
+  }
+
+\textbf{Response}: Modifications made on page 2 section 1.
+
+}
+
+\item{
+
+\fbox{%
+    \parbox{\textwidth}{%
+      \textbf{Comment}: The data source for real-time forecasting is
+      not OMNI. It is fine to discuss the OMNI data since that is what
+      is used later in the chapter for the example study, but it might
+      be better to discuss the OMNI data when working through the
+      example so as not to confuse the reader about real- time data
+      sources used for real-time space weather forecasting.
+    }
+  }
+
+\textbf{Response}: It is mentioned on page 2, section 1.
+
+}
+
+\item{
+
+\fbox{%
+    \parbox{\textwidth}{%
+      \textbf{Comment}: If you are only using 1-hour values, how can
+      you get a useful real-time prediction?
+    }
+  }
+
+\textbf{Response}: The question is not relevant to the scope of the
+chapter, if one is interested in making predictions for geomagnetic
+indices minutes in the future then one may apply the methodology
+outlined to minute cadence data.
+
+}
+
+\item{
+
+\fbox{%
+    \parbox{\textwidth}{%
+      \textbf{Comment}: Please define what m and K are within the text.
+    }
+  }
+
+\textbf{Response}: Defined on page 4, section 3.1
+
+}
+
+\item{
+
+\fbox{%
+    \parbox{\textwidth}{%
+      \textbf{Comment}: Please clarify why you are using hourly OMNI
+      data to predict Dst. Wouldn’t it be better to use the 1-minute
+      data if you want to actually generate a useful forecast?
+    }
+  }
+
+\textbf{Response}: This question is beyond the scope of this
+chapter. The aim of the chapter is to educate practitioners on
+applications of the GP methodology for time series prediction, the
+choice of data cadence is not of primary relevance here. Depending on
+the particular application and research questions being considered,
+practitioners would choose which data set is more suitable for their purpose.
+
+}
+
+\item{
+
+\fbox{%
+    \parbox{\textwidth}{%
+      \textbf{Comment}: When you mention the lag time p, more
+      discussion would be helpful. How far back in time do you
+      typically need to go? Does it depend more on the amount of time
+      or the number of points? If I use 1-min data instead of 1-hour
+      data do I need to use more points?
+    }
+  }
+
+\textbf{Response}: Modifications made in section 5.4. Choice of lag
+time p is empirical, how it changes depends on the characteristics of
+the particular time series and data set being considered.
+
+}
+
+\item{
+
+\fbox{%
+    \parbox{\textwidth}{%
+      \textbf{Comment}: Be consistent in either writing “sub-storm” or “substorm”
+    }
+  }
+
+\textbf{Response}: Modifications made in the manuscript.
+
+}
+
+\item{
+
+\fbox{%
+    \parbox{\textwidth}{%
+      \textbf{Comment}: Define RBE within the text in addition to in the table.
+    }
+  }
+
+\textbf{Response}: RBF has been defined on page 7, section 5.2.
+
+}
+
+\item{
+
+\fbox{%
+    \parbox{\textwidth}{%
+      \textbf{Comment}: Hyper-parameters is not hyphenated in the
+      table while it is elsewhere within the text.
+    }
+  }
+
+\textbf{Response}: Modifications made throughout the manuscript.
+
+}
+
+\item{
+
+\fbox{%
+    \parbox{\textwidth}{%
+      \textbf{Comment}: Define Q in the text when it is first discussed.
+    }
+  }
+
+\textbf{Response}: Changes made in section 5.3.
+
+}
+
+\item{
+
+\fbox{%
+    \parbox{\textwidth}{%
+      \textbf{Comment}: In section 6.3 a more detailed description of
+      how you got to the last equation would be useful (as would
+      equation numbers).
+    }
+  }
+
+\textbf{Response}: The equation is nothing but the logarithm of the
+density function of the multivariate gaussian which is a very well
+known equation in mathematics and science. (Section 5.3 page 8)
+
+}
+
+\item{
+
+\fbox{%
+    \parbox{\textwidth}{%
+      \textbf{Comment}: “Some of the techniques used for model
+      selection in the context of GPR include.” This is a fragment of
+      a sentence.
+    }
+  }
+
+\textbf{Response}: Changes made on page 9.
+
+}
+
+\item{
+
+\fbox{%
+    \parbox{\textwidth}{%
+      \textbf{Comment}: In the first paragraph of section 6.4, please
+      explain why it would not be beneficial to group the quantities
+      with the kernel hyper-parameters in the model selection procedure.
+    }
+  }
+
+\textbf{Response}: Modifications made in section 5.4 on page 10.
+
+}
+
+\item{
+
+\fbox{%
+    \parbox{\textwidth}{%
+      \textbf{Comment}: Why does Table 2 come after Tables 3 and 4 in
+      the text?
+    }
+  }
+
+\textbf{Response}: Appropriate corrections made in the manuscript.
+
+}
+
+\item{
+
+\fbox{%
+    \parbox{\textwidth}{%
+      \textbf{Comment}: When choosing performance metrics, there are
+      several other metrics that are traditionally used by the weather
+      forecasting community that would be good to include such as the
+      Heidke Skill Score (HSS). A great reference is Statistical
+      Methods in Atmospheric Science by Daniel Wilks.
+    }
+  }
+
+\textbf{Response}: The Heikde Skill Score is a metric used for
+categorical predictive problems, a reference to the aforementioned
+book has been added in section 6 point 3 on page 11.
+
+}
+
+\item{
+
+\fbox{%
+    \parbox{\textwidth}{%
+      \textbf{Comment}: When discussing the maximum time lag, use
+      units (min or hour) and discuss how these results would change
+      if using minutes vs. hours.
+    }
+  }
+
+\textbf{Response}: It is not possible to rigourously state how the
+maximum time lag would change if using minutes instead of hours, as it
+is empirically determined. That is why the chapter discusses a
+workflow which can be applied in either case.
+
+}
+
+\item{
+
+\fbox{%
+    \parbox{\textwidth}{%
+      \textbf{Comment}: Please elaborate on how the decision is made
+      as to which model order yields the “best performance”.
+    }
+  }
+
+\textbf{Response}: Changes have been made in section 6 point 4.
+
+}
+
+\item{
+
+\fbox{%
+    \parbox{\textwidth}{%
+      \textbf{Comment}: This section could benefit from a more though
+      discussion. As this is a text book, I think it would be useful
+      for students if a more comprehensive description was included.
+    }
+  }
+
+\textbf{Response}: Changes have been made to section 9.
+
+}
+
+\item{
+
+\fbox{%
+    \parbox{\textwidth}{%
+      \textbf{Comment}: What did the persistence model predict? Could
+      you plot that on the graph as well? A discussion of the
+      persistence forecast results compared to these in the text would
+      be helpful.
+    }
+  }
+
+\textbf{Response}: Persistence model simply predicts the Dst value of
+the previous hour as the prediction for the current hour. It is simply
+a baseline predictor which can be used for simple evaluation of
+predictive models.
+
+}
+
+\item{
+
+\fbox{%
+    \parbox{\textwidth}{%
+      \textbf{Comment}: How much lead time do you get with this method? 
+    }
+  }
+
+\textbf{Response}: Since the example is of one hour ahead prediction,
+it gives a lead time of one hour.
+
+}
+
+\item{
+
+\fbox{%
+    \parbox{\textwidth}{%
+      \textbf{Comment}: The chapter just ends. A conclusion or summary
+      would be helpful.
+    }
+  }
+
+\textbf{Response}: A conclusion has been added in section 9.
+
+}
+
+\end{enumerate}
+
+
+\end{document}
